@@ -48,6 +48,8 @@ local menu = "wofi"
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 hl.on("hyprland.start", function () 
+    -- Login automático: a sessão já começa travada na tela Breach Protocol
+    hl.exec_cmd("$HOME/.config/hypr/scripts/lock.sh --immediate-render --no-fade-in")
     hl.exec_cmd("waybar")
     hl.exec_cmd("hyprpaper")
 end)
@@ -95,11 +97,11 @@ hl.config({
         gaps_in  = 4,
         gaps_out = 10,
 
-        border_size = 1,
+        border_size = 2,
 
         col = {
-            active_border   = "rgba(eaeaeaee)",
-            inactive_border = "rgba(1e1e1eee)",
+            active_border   = "rgba(ff1f3dff)",
+            inactive_border = "rgba(3a1018ff)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -264,7 +266,7 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("pkill -x wofi || wofi --show drun"))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/lock.sh"))
 hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("kitty --class btop-term -e btop"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("/home/w0lf/.config/hypr/reload.sh"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("/home/w0lf/.config/hypr/reload.sh"))
@@ -274,6 +276,14 @@ hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
 hl.bind(mainMod .. " + SHIFT + CTRL + S", hl.dsp.exec_cmd(screenshot .. " full"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+
+-- Animação de desbloqueio (Breach Protocol): aparece instantânea, sem o fade das
+-- camadas, para o desktop não vazar entre o hyprlock e a animação
+hl.layer_rule({
+    name    = "ares-breach-no-anim",
+    match   = { namespace = "^ares-breach$" },
+    no_anim = true,
+})
 
 hl.window_rule({
     name = "btop-float",

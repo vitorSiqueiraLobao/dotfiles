@@ -29,8 +29,9 @@
     ],
 
     "custom/ares-badge": {
-        "format": "ARES//SYS",
-        "tooltip": false
+        "format": "▓▒░ ARES ░▒▓",
+        "tooltip-format": "Menu do sistema",
+        "on-click": "$HOME/.config/waybar/scripts/power_menu.py"
     },
 
     "hyprland/workspaces": {
@@ -43,20 +44,29 @@
     },
 
     "hyprland/window": {
-        "format": "│ {title}",
+        "format": "<span color='#ff1f3d'>║</span> {title}",
         "max-length": 45,
         "separate-outputs": true
     },
 
     "clock": {
-        "format": "TIME::{0:%H:%M:%S} ── DATE::{0:%Y.%m.%d}",
+        "format": "<span color='#ff1f3d'>║</span> {0:%H:%M:%S} <span color='#7a6f73'>──</span> {0:%d.%m.%Y} <span color='#ff1f3d'>║</span>",
         "interval": 1,
-        "tooltip-format": "<tt><small>{calendar}</small></tt>"
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "format": {
+                "months": "<span color='#ff1f3d'><b>{}</b></span>",
+                "weekdays": "<span color='#7a6f73'>{}</span>",
+                "today": "<span color='#00f0ff'><b>{}</b></span>"
+            }
+        }
     },
 
+    // Medidores ASCII: {icon} escolhe um dos 9 estágios conforme a %
     "cpu": {
         "interval": 2,
-        "format": "CPU::{usage}%",
+        "format": "CPU <span color='#00f0ff'>{icon}</span> {usage}%",
+        "format-icons": ["[<span color='#2a4a50'>░░░░░░░░</span>]", "[█<span color='#2a4a50'>░░░░░░░</span>]", "[██<span color='#2a4a50'>░░░░░░</span>]", "[███<span color='#2a4a50'>░░░░░</span>]", "[████<span color='#2a4a50'>░░░░</span>]", "[█████<span color='#2a4a50'>░░░</span>]", "[██████<span color='#2a4a50'>░░</span>]", "[███████<span color='#2a4a50'>░</span>]", "[████████]"],
         "on-click": "kitty --class btop-term -e btop"
     },
 
@@ -64,14 +74,16 @@
         "interval": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 80,
-        "format": "TEMP::{temperatureC}°C",
+        "format": "TEMP <span color='#00f0ff'>{temperatureC}°C</span>",
+        "format-critical": "TEMP <span color='#ff1f3d'>{temperatureC}°C !</span>",
         "on-click": "kitty --class btop-term -e btop"
     },
 
     "memory": {
         "interval": 2,
-        "format": "RAM::{used:0.1f}G",
-        "tooltip-format": "Used: {used:0.1f}G / {total:0.1f}G ({percentage}%)",
+        "format": "RAM <span color='#00f0ff'>{icon}</span> {used:0.1f}G",
+        "format-icons": ["[<span color='#2a4a50'>░░░░░░░░</span>]", "[█<span color='#2a4a50'>░░░░░░░</span>]", "[██<span color='#2a4a50'>░░░░░░</span>]", "[███<span color='#2a4a50'>░░░░░</span>]", "[████<span color='#2a4a50'>░░░░</span>]", "[█████<span color='#2a4a50'>░░░</span>]", "[██████<span color='#2a4a50'>░░</span>]", "[███████<span color='#2a4a50'>░</span>]", "[████████]"],
+        "tooltip-format": "Usado: {used:0.1f}G / {total:0.1f}G ({percentage}%)",
         "on-click": "kitty --class btop-term -e btop"
     },
 
@@ -84,16 +96,16 @@
 
     "disk": {
         "interval": 30,
-        "format": "DISK::{percentage_used}%",
+        "format": "DISK <span color='#00f0ff'>{percentage_used}%</span>",
         "path": "/",
-        "tooltip-format": "Storage: {used} used / {total} total ({free} free)"
+        "tooltip-format": "Disco: {used} usado / {total} total ({free} livre)"
     },
 
     "network": {
         "interval": 3,
-        "format-wifi": "NET::{essid}",
-        "format-ethernet": "NET::ETH",
-        "format-disconnected": "NET::OFF",
+        "format-wifi": "NET <span color='#00f0ff'>{essid}</span>",
+        "format-ethernet": "NET <span color='#00f0ff'>ETH</span>",
+        "format-disconnected": "NET <span color='#ff1f3d'>OFF</span>",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
     },
 

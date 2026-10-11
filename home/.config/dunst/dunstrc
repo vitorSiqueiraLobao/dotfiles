@@ -1,6 +1,7 @@
 [global]
-    font = JetBrainsMono Nerd Font 10
-    format = "<b>[%s]</b>\n%b"
+    font = 3270 Nerd Font 12
+    # Estilo Cyberpunk: título, linha, etiqueta com o nome do app e a mensagem
+    format = "<span foreground='#e8e2e4' size='large' letter_spacing='1200'>%s</span>\n<span foreground='#ff1f3d'>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>\n<span background='#ff1f3d' foreground='#08060a'> %a </span>  <span foreground='#4a3a40' size='small'>ARES//NET ▓▒░</span>\n<span foreground='#00f0ff'>%b</span>"
     sort = yes
     indicate_hidden = yes
     alignment = left
@@ -11,8 +12,15 @@
     hide_duplicate_count = false
     show_indicators = no
 
+    ### Ícone do app à direita ###
+    icon_position = right
+    min_icon_size = 44
+    max_icon_size = 44
+    icon_theme = "breeze-dark, Adwaita, hicolor"
+    enable_recursive_icon_lookup = true
+
     ### Geometry ###
-    width = 380
+    width = 420
     height = (0, 200)
     offset = (16, 48)
     origin = top-right
@@ -30,31 +38,32 @@
     corner_radius = 0
     transparency = 0
     separator_height = 1
+    gap_size = 8
     padding = 12
     horizontal_padding = 16
     text_icon_padding = 12
-    frame_width = 1
-    frame_color = "#eaeaea"
+    frame_width = 2
+    frame_color = "#ff1f3d"
     separator_color = frame
 
     ### Colors ###
-    background = "#080808"
-    foreground = "#d8d8d8"
+    background = "#100a0e"
+    foreground = "#e8e2e4"
 
 [urgency_low]
-    background = "#080808"
-    foreground = "#888888"
-    frame_color = "#222222"
+    background = "#100a0e"
+    foreground = "#7a6f73"
+    frame_color = "#3a1018"
     timeout = 4
 
 [urgency_normal]
-    background = "#080808"
-    foreground = "#d8d8d8"
-    frame_color = "#eaeaea"
+    background = "#100a0e"
+    foreground = "#e8e2e4"
+    frame_color = "#ff1f3d"
     timeout = 6
 
 [urgency_critical]
-    background = "#140505"
+    background = "#2a0a12"
     foreground = "#ffffff"
-    frame_color = "#cf4f4f"
+    frame_color = "#00f0ff"
     timeout = 0

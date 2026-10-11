@@ -1,0 +1,5 @@
+# ARES notifyd no lugar do dunst (o diretório do usuário tem prioridade sobre o do sistema)
+[D-BUS Service]
+Name=org.freedesktop.Notifications
+Exec=/home/w0lf/.config/hypr/scripts/ares_notifyd.py
+SystemdService=ares-notifyd.service

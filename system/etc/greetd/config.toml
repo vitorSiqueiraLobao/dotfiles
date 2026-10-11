@@ -1,0 +1,17 @@
+# ARES // greetd
+# Boot: login automático no Hyprland, que já abre travado na tela Breach Protocol (hyprlock).
+# Logout: tela de login em texto (tuigreet) nas cores do ARES.
+
+[terminal]
+vt = 1
+
+[general]
+service = "login"
+
+[initial_session]
+command = "start-hyprland"
+user = "w0lf"
+
+[default_session]
+command = "tuigreet --time --asterisks --remember --cmd start-hyprland --greeting '▓▒░ ARES // BREACH PROTOCOL ░▒▓' --theme 'border=red;title=red;greet=red;text=cyan;prompt=red;input=cyan;time=cyan;action=red;button=cyan'"
+user = "greeter"

@@ -1,6 +1,18 @@
 # dotfiles
 
-Configs do meu Arch Linux + Hyprland (ARES).
+Configs do meu Arch Linux + Hyprland (ARES) — tema **Cyber-Red** (vermelho = estrutura,
+ciano = dados), fonte IBM 3270 Nerd Font, visual retrô/cyberpunk.
+
+## Destaques
+
+- **Login/bloqueio Breach Protocol**: o greetd faz login automático e o Hyprland já abre
+  travado no hyprlock no estilo do minigame do Cyberpunk 2077. Ao desbloquear, uma animação
+  continua o HUD: a CODE MATRIX é resolvida, os daemons são instalados e aparece
+  BREACH SUCCESSFUL. Logout cai no tuigreet.
+- **Notificações próprias** (`ares_notifyd.py`): servidor org.freedesktop.Notifications em
+  GTK4 com cantos cortados e o ícone do app numa moldura (substitui o dunst).
+- **Waybar**: medidores ASCII, mixer de volume por app, toggle claro/escuro e menu do
+  sistema no badge ARES (bloquear, suspender, logout, reiniciar, desligar).
 
 ## Instalar numa máquina nova
 
@@ -30,7 +42,10 @@ Só os links, sem instalar nada: `./install.sh --links`
 | `home/.config/gtk-{3,4}.0/` | Tema/CSS do GTK |
 | `home/.XCompose` | `' + c` → `ç` no layout US internacional |
 | `home/.bashrc`, `home/.bash_profile` | Shell |
+| `home/.config/hypr/scripts/` | lock.sh + Breach Protocol (matriz, sequência, animação), notifyd, screenshot |
+| `home/.config/systemd/user/`, `home/.local/share/dbus-1/` | Ativação do ARES notifyd no lugar do dunst |
 | `system/etc/modprobe.d/amdgpu-frl.conf` | HDMI 2.1 FRL no amdgpu (5120x1440@240 via HDMI, kernel ≥ 7.2) |
+| `system/etc/greetd/config.toml` | Login automático no Hyprland + tuigreet no logout |
 
 ## Notas
 

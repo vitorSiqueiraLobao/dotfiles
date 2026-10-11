@@ -1,17 +1,17 @@
 /* ==========================================================================
-   ARES MAINFRAME // WOFI TITANIUM MONOLITH
+   ARES MAINFRAME // WOFI CYBER-RED
    ========================================================================== */
 
 * {
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
+    font-family: "3270 Nerd Font", "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
     border-radius: 0px;
     box-shadow: none;
 }
 
 window {
-    background-color: #080808;
-    border: 1px solid #333333;
+    background-color: #100a0e;
+    border: 1px solid #ff1f3d;
     margin: 0px;
     padding: 10px;
 }
@@ -19,19 +19,20 @@ window {
 #outer-box {
     margin: 0px;
     padding: 0px;
-    background-color: #080808;
+    background-color: #100a0e;
 }
 
 #input {
     margin: 4px 4px 12px 4px;
     padding: 8px 12px;
-    border: 1px solid #222222;
-    background-color: #0f0f0f;
-    color: #ffffff;
+    border: 1px solid #3a1018;
+    background-color: #08060a;
+    color: #00f0ff;
+    caret-color: #ff1f3d;
 }
 
 #input:focus {
-    border: 1px solid #eaeaea;
+    border: 1px solid #ff1f3d;
     outline: none;
 }
 
@@ -49,18 +50,17 @@ window {
 }
 
 #entry {
-    padding: 6px 12px;
-    margin: 2px 4px;
+    padding: 4px 12px;
+    margin: 1px 4px;
     border: 1px solid transparent;
     background-color: transparent;
-    color: #888888;
+    color: #7a6f73;
 }
 
 #entry:selected {
-    background-color: #eaeaea;
-    color: #050505;
-    border: 1px solid #ffffff;
-    font-weight: bold;
+    background-color: #ff1f3d;
+    color: #08060a;
+    border: 1px solid #ff5a6e;
 }
 
 #text {
@@ -69,6 +69,5 @@ window {
 }
 
 #text:selected {
-    color: #050505;
-    font-weight: bold;
+    color: #08060a;
 }

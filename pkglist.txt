@@ -10,6 +10,8 @@ fastfetch
 firefox
 git
 gnome-text-editor
+greetd
+greetd-tuigreet
 grim
 gst-plugin-pipewire
 gtk4-layer-shell
@@ -44,6 +46,7 @@ qt6-wayland
 slurp
 smartmontools
 sudo
+ttf-3270-nerd
 uwsm
 vim
 vulkan-intel

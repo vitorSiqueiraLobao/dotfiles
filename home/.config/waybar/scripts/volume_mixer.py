@@ -27,64 +27,67 @@ ICON_OFF = "\U000F075F"  # nf-md-volume_mute
 CSS = """
 window.mixer {
     background-color: transparent;
+    border: none;
+    box-shadow: none;
 }
 .panel {
-    background-color: #0a0a0a;
-    border: 1px solid #242424;
+    background-color: #100a0e;
+    border: 1px solid #3a1018;
+    border-top: 1px solid #ff1f3d;
     padding: 10px 12px 12px 12px;
 }
 .panel * {
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 11px;
+    font-family: "3270 Nerd Font", "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
 }
 .title {
-    background-color: #eaeaea;
-    color: #050505;
-    font-weight: 700;
-    letter-spacing: 1.2px;
+    background-color: #ff1f3d;
+    color: #08060a;
+    letter-spacing: 1px;
     padding: 2px 10px;
     margin-bottom: 8px;
 }
 .section {
-    color: #555555;
-    font-weight: 700;
+    color: #ff1f3d;
     margin: 8px 0 2px 0;
 }
 .row {
-    background-color: #111111;
-    border: 1px solid #1c1c1c;
+    background-color: #160d12;
+    border: 1px solid #3a1018;
     padding: 4px 8px;
     margin-top: 4px;
 }
+.row:hover {
+    border-color: #8f1426;
+}
 .name {
-    color: #d8d8d8;
+    color: #e8e2e4;
 }
 .muted .name, .muted .pct {
-    color: #555555;
+    color: #4a3a40;
 }
 .pct {
-    color: #b0b0b0;
-    min-width: 40px;
+    color: #00f0ff;
+    min-width: 44px;
 }
 .mute {
     background: none;
     border: none;
     box-shadow: none;
-    color: #eaeaea;
+    color: #00f0ff;
     padding: 0 6px;
     min-height: 0;
-    font-size: 14px;
+    font-size: 16px;
 }
 .muted .mute {
-    color: #cf4f4f;
+    color: #ff1f3d;
 }
 .empty {
-    color: #555555;
-    font-style: italic;
+    color: #7a6f73;
     margin-top: 6px;
 }
 scale trough {
-    background-color: #1c1c1c;
+    background-color: #2a141c;
     background-image: none;
     border: none;
     outline: none;
@@ -92,22 +95,26 @@ scale trough {
     border-radius: 0;
 }
 scale highlight {
-    background-color: #eaeaea;
+    background-color: #00f0ff;
     background-image: none;
     border: none;
     border-radius: 0;
 }
 .muted scale highlight {
-    background-color: #444444;
+    background-color: #4a3a40;
 }
 scale slider {
-    background-color: #eaeaea;
-    border: 1px solid #ffffff;
+    background-color: #ff1f3d;
+    background-image: none;
+    border: 1px solid #ff5a6e;
     border-radius: 0;
     min-width: 10px;
     min-height: 14px;
     margin: -6px 0;
     box-shadow: none;
+}
+scale marks {
+    color: #4a3a40;
 }
 """
 
@@ -257,22 +264,22 @@ class Mixer(Gtk.Application):
 
         panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         panel.add_css_class("panel")
-        title = Gtk.Label(label="AUDIO::MIXER", xalign=0)
+        title = Gtk.Label(label="▓▒░ AUDIO::MIXER ░▒▓", xalign=0)
         title.add_css_class("title")
         panel.append(title)
 
-        out_label = Gtk.Label(label="── SAÍDA", xalign=0)
+        out_label = Gtk.Label(label="╔═[ SAÍDA ]", xalign=0)
         out_label.add_css_class("section")
         panel.append(out_label)
         self.sink_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         panel.append(self.sink_box)
 
-        apps_label = Gtk.Label(label="── APPS", xalign=0)
+        apps_label = Gtk.Label(label="╔═[ APPS ]", xalign=0)
         apps_label.add_css_class("section")
         panel.append(apps_label)
         self.apps_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         panel.append(self.apps_box)
-        self.empty = Gtk.Label(label="nenhum app tocando som", xalign=0)
+        self.empty = Gtk.Label(label="> nenhum app tocando som_", xalign=0)
         self.empty.add_css_class("empty")
         panel.append(self.empty)
 

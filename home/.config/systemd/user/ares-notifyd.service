@@ -1,0 +1,10 @@
+[Unit]
+Description=ARES notifyd (notificações estilo Cyberpunk)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=dbus
+BusName=org.freedesktop.Notifications
+ExecStart=%h/.config/hypr/scripts/ares_notifyd.py
+Restart=on-failure

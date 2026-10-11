@@ -10,7 +10,10 @@ TEMP_M=$(cat /sys/class/drm/card1/device/hwmon/hwmon3/temp1_input 2>/dev/null ||
 TEMP_C=$(awk "BEGIN {printf \"%.0f\", $TEMP_M / 1000}")
 
 # JSON output for Waybar
-TEXT="GPU::${GPU_BUSY}% ─ VRAM::${VRAM_USED_GB}G ─ PWR::${PWR_W}W"
+# Medidor ASCII de 8 blocos
+FILLED=$(( (GPU_BUSY + 6) / 12 )); [ "$FILLED" -gt 8 ] && FILLED=8
+BAR="[$(printf '%*s' "$FILLED" '' | sed 's/ /█/g')<span color='#2a4a50'>$(printf '%*s' $((8 - FILLED)) '' | sed 's/ /░/g')</span>]"
+TEXT="GPU <span color='#00f0ff'>${BAR}</span> ${GPU_BUSY}% <span color='#7a6f73'>─</span> VRAM ${VRAM_USED_GB}G <span color='#7a6f73'>─</span> ${PWR_W}W"
 TOOLTIP="AMD Radeon RX 9070 XT\nGPU Load: ${GPU_BUSY}%\nTemperature: ${TEMP_C}°C\nVRAM: ${VRAM_USED_GB} GB / 16.0 GB\nPower Draw: ${PWR_W} W"
 
 echo "{\"text\": \"$TEXT\", \"tooltip\": \"$TOOLTIP\", \"class\": \"gpu\"}"

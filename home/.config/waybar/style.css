@@ -1,56 +1,69 @@
 /* ==========================================================================
-   ARES MAINFRAME // TITANIUM MONOLITH FLOATING ISLANDS
+   ARES MAINFRAME // CYBER-RED FLOATING ISLANDS
+   Vermelho = estrutura · Ciano = dados
    ========================================================================== */
 
+@define-color bg        #08060a;
+@define-color panel     #100a0e;
+@define-color module    #160d12;
+@define-color line      #3a1018;
+@define-color red       #ff1f3d;
+@define-color red_dim   #8f1426;
+@define-color text      #e8e2e4;
+@define-color muted     #7a6f73;
+@define-color cyan      #00f0ff;
+
 * {
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 11px;
-    font-weight: 500;
+    font-family: "3270 Nerd Font", "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+    font-weight: normal;
     border-radius: 0px;
     min-height: 0;
     margin: 0;
     padding: 0;
 }
 
-/* Make base waybar transparent so islands float independently */
 window#waybar {
     background-color: transparent;
     border: none;
+}
+
+tooltip {
+    background-color: @panel;
+    border: 1px solid @red;
+    color: @text;
 }
 
 /* ==========================================================================
    ISLAND CONTAINERS
    ========================================================================== */
 
-.modules-left {
-    background-color: #0a0a0a;
-    border: 1px solid #242424;
-    padding: 0 4px;
-}
-
-.modules-center {
-    background-color: #0a0a0a;
-    border: 1px solid #242424;
-    padding: 0 16px;
-}
-
+.modules-left,
+.modules-center,
 .modules-right {
-    background-color: #0a0a0a;
-    border: 1px solid #242424;
-    padding: 0 6px;
+    background-color: @panel;
+    border: 1px solid @line;
+    border-top: 1px solid @red;
 }
+
+.modules-left   { padding: 0 4px; }
+.modules-center { padding: 0 14px; }
+.modules-right  { padding: 0 6px; }
 
 /* --------------------------------------------------------------------------
-   LEFT ISLAND: ARES Badge, Workspaces, Window Title
+   LEFT ISLAND: Badge, Workspaces, Window Title
    -------------------------------------------------------------------------- */
 
 #custom-ares-badge {
-    background-color: #eaeaea;
-    color: #050505;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    padding: 0 12px;
+    background-color: @red;
+    color: @bg;
+    letter-spacing: 1px;
+    padding: 0 10px;
     margin: 3px 6px 3px 2px;
+}
+
+#custom-ares-badge:hover {
+    background-color: @cyan;
 }
 
 #workspaces {
@@ -59,95 +72,90 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 8px;
-    margin: 3px 2px;
-    color: #666666;
-    background-color: #111111;
-    border: 1px solid #1c1c1c;
+    padding: 0 4px;
+    margin: 3px 1px;
+    color: @muted;
+    background-color: transparent;
+    border: 1px solid transparent;
     transition: none;
 }
 
 #workspaces button:hover {
-    background-color: #1a1a1a;
-    color: #eaeaea;
-    border: 1px solid #333333;
+    color: @cyan;
+    background-color: @module;
+    border: 1px solid @line;
+    box-shadow: none;
 }
 
 #workspaces button.active {
-    background-color: #eaeaea;
-    color: #050505;
-    border: 1px solid #ffffff;
-    font-weight: 700;
+    background-color: @red;
+    color: @bg;
+    border: 1px solid @red;
 }
 
 #workspaces button.urgent {
-    background-color: #cf4f4f;
-    color: #ffffff;
-    border-color: #ff6b6b;
+    background-color: @cyan;
+    color: @bg;
+    border-color: @cyan;
 }
 
 #window {
-    color: #777777;
-    padding-left: 8px;
-    font-style: italic;
+    color: @muted;
+    padding-left: 6px;
 }
 
 /* --------------------------------------------------------------------------
-   CENTER ISLAND: Military Chrono
+   CENTER ISLAND: Chrono
    -------------------------------------------------------------------------- */
 
 #clock {
-    color: #eaeaea;
-    font-weight: 600;
-    letter-spacing: 0.8px;
+    color: @text;
+    letter-spacing: 1px;
     padding: 0 4px;
 }
 
 /* --------------------------------------------------------------------------
-   RIGHT ISLAND: Telemetry Modules
+   RIGHT ISLAND: Telemetry
    -------------------------------------------------------------------------- */
 
 #cpu, #temperature, #memory, #custom-gpu, #disk, #network {
-    background-color: #111111;
-    color: #b0b0b0;
-    border: 1px solid #1c1c1c;
-    padding: 0 9px;
+    background-color: @module;
+    color: @text;
+    border: 1px solid @line;
+    padding: 0 8px;
     margin: 3px 2px;
 }
 
-#cpu:hover, #temperature:hover, #memory:hover, #custom-gpu:hover, #disk:hover {
-    background-color: #181818;
-    color: #ffffff;
-    border-color: #333333;
+#cpu:hover, #temperature:hover, #memory:hover, #custom-gpu:hover, #disk:hover, #network:hover {
+    border-color: @red;
 }
 
-#custom-gpu {
-    color: #d8d8d8;
-    font-weight: 600;
+#temperature.critical {
+    background-color: @red_dim;
 }
 
 #custom-mixer, #custom-theme {
-    background-color: #111111;
-    color: #eaeaea;
-    border: 1px solid #1c1c1c;
+    background-color: @module;
+    color: @cyan;
+    border: 1px solid @line;
     padding: 0 10px 0 8px;
     margin: 3px 2px;
-    font-size: 13px;
+    font-size: 17px;
 }
 
 #custom-mixer:hover, #custom-theme:hover {
-    background-color: #181818;
-    color: #ffffff;
-    border-color: #333333;
+    color: @bg;
+    background-color: @cyan;
+    border-color: @cyan;
 }
 
 #custom-theme.light {
-    color: #f2c94c;
+    color: #ffb000;
 }
 
 #tray {
     padding: 0 8px;
     margin: 3px 2px 3px 6px;
-    background-color: #111111;
-    border: 1px solid #1c1c1c;
+    background-color: @module;
+    border: 1px solid @line;
 }
