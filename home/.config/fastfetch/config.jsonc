@@ -3,6 +3,11 @@
     "logo": {
         "type": "file",
         "source": "~/.config/fastfetch/ares.txt",
+        "color": {
+            "1": "38;2;234;234;234",
+            "2": "38;2;80;80;80",
+            "3": "38;2;230;230;230"
+        },
         "padding": {
             "top": 1,
             "right": 3

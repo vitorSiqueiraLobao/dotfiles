@@ -268,6 +268,10 @@ hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("kitty --class btop-term -e btop"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("/home/w0lf/.config/hypr/reload.sh"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("/home/w0lf/.config/hypr/reload.sh"))
+-- Screenshot: clique numa janela ou arraste uma área / +Ctrl = tela inteira
+local screenshot = "$HOME/.config/hypr/scripts/screenshot.sh"
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
+hl.bind(mainMod .. " + SHIFT + CTRL + S", hl.dsp.exec_cmd(screenshot .. " full"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
@@ -313,7 +317,7 @@ end
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + ALT + S",   hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))

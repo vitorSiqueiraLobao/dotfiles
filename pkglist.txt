@@ -51,6 +51,7 @@ vulkan-radeon
 waybar
 wget
 wireplumber
+wl-clipboard
 wofi
 wpa_supplicant
 xdg-desktop-portal-hyprland
