@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=ARES Files
+GenericName=File Manager
+Comment=yazi no kitty holograma
+Exec=/home/w0lf/.config/hypr/scripts/ares_files.sh %U
+Icon=system-file-manager
+Terminal=false
+MimeType=inode/directory;
+Categories=System;FileTools;FileManager;

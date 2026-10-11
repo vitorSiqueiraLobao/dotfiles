@@ -1,0 +1,5 @@
+# ARES: "mostrar na pasta" abre o yazi (o diretório do usuário tem prioridade sobre o do Dolphin)
+[D-BUS Service]
+Name=org.freedesktop.FileManager1
+Exec=/home/w0lf/.config/hypr/scripts/ares_filemanager1.py
+SystemdService=ares-filemanager1.service

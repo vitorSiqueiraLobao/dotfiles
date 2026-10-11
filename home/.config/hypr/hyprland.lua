@@ -36,7 +36,7 @@ hl.monitor({
 
 -- Set programs that you use
 local terminal    = "kitty"
-local fileManager = "dolphin"
+local fileManager = "$HOME/.config/hypr/scripts/ares_files.sh"
 local menu = "wofi"
 
 
@@ -301,7 +301,7 @@ hl.layer_rule({
 -- A transparência base vem do kitty.conf (background_opacity).
 hl.window_rule({
     name         = "kitty-holo",
-    match        = { class = "^kitty$" },
+    match        = { class = "^(kitty|ares-files)$" },
     border_size  = 1,
     border_color = "rgba(00f0ffff) rgba(00f0ff4d)",
     opacity      = "1.0 0.75",
@@ -309,8 +309,16 @@ hl.window_rule({
 
 hl.window_rule({
     name      = "no-glow-others",
-    match     = { class = "negative:^kitty$" },
+    match     = { class = "negative:^(kitty|ares-files)$" },
     no_shadow = true,
+})
+
+hl.window_rule({
+    name   = "ares-files-float",
+    match  = { class = "ares-files" },
+    float  = true,
+    size   = { 1800, 1000 },
+    center = true,
 })
 
 hl.window_rule({

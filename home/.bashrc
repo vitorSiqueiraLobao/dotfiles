@@ -16,6 +16,16 @@ PS1='\[\e[38;2;255;31;61m\]┌──[\[\e[38;2;0;240;255m\]\u@\h\[\e[38;2;255;31
 
 
 
+# y: abre o yazi e, ao sair (q), o shell fica na pasta onde você estava
+y() {
+    local tmp cwd
+    tmp=$(mktemp -t yazi-cwd.XXXXXX)
+    yazi "$@" --cwd-file="$tmp"
+    cwd=$(<"$tmp")
+    [[ -n $cwd && $cwd != "$PWD" ]] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}
+
 # Sons ARES no kitty: digitação no prompt + som ao abrir
 [[ $TERM == xterm-kitty && -f ~/.config/ares/keysfx.bash ]] && source ~/.config/ares/keysfx.bash
 

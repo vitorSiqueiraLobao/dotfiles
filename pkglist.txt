@@ -1,3 +1,4 @@
+7zip
 amd-ucode
 base
 base-devel
@@ -7,7 +8,10 @@ dolphin
 dunst
 efibootmgr
 fastfetch
+fd
+ffmpegthumbnailer
 firefox
+fzf
 git
 gnome-text-editor
 greetd
@@ -20,7 +24,9 @@ hunspell-en_us
 hyprland
 hyprlock
 hyprpaper
+imagemagick
 intel-media-driver
+jq
 kitty
 libnotify
 libpulse
@@ -31,8 +37,8 @@ linux-firmware
 mkinitcpio
 mpv
 nano
-networkmanager
 network-manager-applet
+networkmanager
 nodejs
 npm
 pavucontrol
@@ -45,6 +51,7 @@ python-gobject
 python-numpy
 qt5-wayland
 qt6-wayland
+resvg
 slurp
 smartmontools
 sudo
@@ -65,4 +72,6 @@ xdg-utils
 xf86-video-amdgpu
 xf86-video-ati
 xf86-video-nouveau
+yazi
+zoxide
 zram-generator

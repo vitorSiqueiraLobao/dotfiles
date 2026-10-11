@@ -1,0 +1,7 @@
+[Unit]
+Description=ARES // FileManager1 (abre pastas no yazi em vez do Dolphin)
+
+[Service]
+Type=dbus
+BusName=org.freedesktop.FileManager1
+ExecStart=%h/.config/hypr/scripts/ares_filemanager1.py

@@ -5,3 +5,4 @@ x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 text/plain=org.gnome.TextEditor.desktop
 text/markdown=org.gnome.TextEditor.desktop
 application/x-shellscript=org.gnome.TextEditor.desktop
+inode/directory=ares-files.desktop

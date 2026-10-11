@@ -1,0 +1,16 @@
+# ARES MAINFRAME // yazi
+[mgr]
+ratio          = [ 1, 3, 4 ]
+sort_by        = "natural"
+sort_dir_first = true
+linemode       = "size"
+show_hidden    = false
+show_symlink   = true
+scrolloff      = 5
+
+[preview]
+wrap        = "no"
+tab_size    = 4
+max_width   = 1600
+max_height  = 1600
+image_delay = 20
