@@ -1,0 +1,4 @@
+antigravity
+claude-code
+claude-desktop
+yay

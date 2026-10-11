@@ -1,0 +1,87 @@
+/* ARES MAINFRAME // GTK TITANIUM MONOLITH (INTEGRATED FLYOUT) */
+* {
+    border-radius: 0px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+}
+
+window {
+    background-color: #080808;
+    color: #d8d8d8;
+    border: 1px solid #333333;
+}
+
+headerbar {
+    background-color: #0c0c0c;
+    border-bottom: 1px solid #1f1f1f;
+    min-height: 28px;
+    padding: 2px 8px;
+}
+
+headerbar title {
+    font-weight: bold;
+    color: #eaeaea;
+    font-size: 11px;
+}
+
+notebook tab {
+    padding: 6px 14px;
+    background-color: #0c0c0c;
+    color: #666666;
+    border: 1px solid #1a1a1a;
+    font-weight: 500;
+}
+
+notebook tab:hover {
+    color: #aaaaaa;
+    background-color: #141414;
+}
+
+notebook tab:checked {
+    background-color: #eaeaea;
+    color: #050505;
+    border: 1px solid #ffffff;
+    font-weight: 700;
+}
+
+scale trough {
+    background-color: #161616;
+    min-height: 6px;
+    border: 1px solid #222222;
+}
+
+scale highlight {
+    background-color: #eaeaea;
+}
+
+scale slider {
+    background-color: #ffffff;
+    min-width: 16px;
+    min-height: 16px;
+    margin: 0px;
+    border: 1px solid #ffffff;
+}
+
+button {
+    background-color: #121212;
+    color: #cccccc;
+    border: 1px solid #222222;
+    padding: 4px 10px;
+}
+
+button:hover {
+    background-color: #eaeaea;
+    color: #050505;
+    border-color: #ffffff;
+}
+
+combobox, entry {
+    background-color: #0f0f0f;
+    color: #ffffff;
+    border: 1px solid #222222;
+    padding: 4px 8px;
+}
+
+combobox:focus, entry:focus {
+    border-color: #eaeaea;
+}

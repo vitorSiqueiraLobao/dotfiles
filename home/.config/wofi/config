@@ -1,0 +1,17 @@
+width=560
+height=380
+location=center
+show=drun
+prompt=> EXECUTE_
+filter_rate=100
+allow_markup=true
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+insensitive=true
+allow_images=false
+image_size=0
+gtk_dark=true
+close_on_focus_loss=true
+layer=overlay

@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# Instala os dotfiles: pacotes, links das configs e ajustes de sistema.
+# Uso: ./install.sh            -> tudo
+#      ./install.sh --links    -> só recria os links das configs
+
+set -euo pipefail
+
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+
+info() { printf '\e[1;37m==> %s\e[0m\n' "$*"; }
+
+# ---------------------------------------------------------------------------
+# Links: cada arquivo em home/ vira um symlink no mesmo caminho em $HOME
+# ---------------------------------------------------------------------------
+link_home() {
+    info "Linkando configs em $HOME"
+    cd "$DOTFILES/home"
+    find . -type f | while read -r f; do
+        f="${f#./}"
+        src="$DOTFILES/home/$f"
+        dst="$HOME/$f"
+        if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+            continue
+        fi
+        mkdir -p "$(dirname "$dst")"
+        if [ -e "$dst" ] || [ -L "$dst" ]; then
+            mkdir -p "$BACKUP/$(dirname "$f")"
+            mv "$dst" "$BACKUP/$f"
+            echo "  backup: ~/$f -> $BACKUP/$f"
+        fi
+        ln -s "$src" "$dst"
+        echo "  link:   ~/$f"
+    done
+}
+
+if [ "${1:-}" = "--links" ]; then
+    link_home
+    exit 0
+fi
+
+# ---------------------------------------------------------------------------
+# Pacotes
+# ---------------------------------------------------------------------------
+info "Instalando pacotes oficiais (pkglist.txt)"
+sudo pacman -Syu --needed - < "$DOTFILES/pkglist.txt"
+
+if ! command -v yay >/dev/null; then
+    info "Instalando yay"
+    tmp=$(mktemp -d)
+    git clone https://aur.archlinux.org/yay-bin.git "$tmp/yay-bin"
+    (cd "$tmp/yay-bin" && makepkg -si --noconfirm)
+    rm -rf "$tmp"
+fi
+
+info "Instalando pacotes do AUR (pkglist-aur.txt)"
+yay -S --needed - < "$DOTFILES/pkglist-aur.txt"
+
+# ---------------------------------------------------------------------------
+# Configs do usuário
+# ---------------------------------------------------------------------------
+link_home
+
+# ---------------------------------------------------------------------------
+# Sistema (/etc) — HDMI 2.1 FRL no amdgpu (240 Hz via HDMI)
+# ---------------------------------------------------------------------------
+info "Copiando arquivos de sistema para /etc"
+sudo cp -rv "$DOTFILES/system/etc/." /etc/
+info "Regerando initramfs"
+sudo mkinitcpio -P
+
+# ---------------------------------------------------------------------------
+# Preferências (dconf): modo escuro
+# ---------------------------------------------------------------------------
+info "Aplicando modo escuro"
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+
+info "Pronto. Reinicie o PC para aplicar tudo."

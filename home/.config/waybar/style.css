@@ -1,0 +1,163 @@
+/* ==========================================================================
+   ARES MAINFRAME // TITANIUM MONOLITH FLOATING ISLANDS
+   ========================================================================== */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 0px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Make base waybar transparent so islands float independently */
+window#waybar {
+    background-color: transparent;
+    border: none;
+}
+
+/* ==========================================================================
+   ISLAND CONTAINERS
+   ========================================================================== */
+
+.modules-left {
+    background-color: #0a0a0a;
+    border: 1px solid #242424;
+    padding: 0 4px;
+}
+
+.modules-center {
+    background-color: #0a0a0a;
+    border: 1px solid #242424;
+    padding: 0 16px;
+}
+
+.modules-right {
+    background-color: #0a0a0a;
+    border: 1px solid #242424;
+    padding: 0 6px;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT ISLAND: ARES Badge, Workspaces, Window Title
+   -------------------------------------------------------------------------- */
+
+#custom-ares-badge {
+    background-color: #eaeaea;
+    color: #050505;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    padding: 0 12px;
+    margin: 3px 6px 3px 2px;
+}
+
+#workspaces {
+    background-color: transparent;
+    padding: 0 2px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 3px 2px;
+    color: #666666;
+    background-color: #111111;
+    border: 1px solid #1c1c1c;
+    transition: none;
+}
+
+#workspaces button:hover {
+    background-color: #1a1a1a;
+    color: #eaeaea;
+    border: 1px solid #333333;
+}
+
+#workspaces button.active {
+    background-color: #eaeaea;
+    color: #050505;
+    border: 1px solid #ffffff;
+    font-weight: 700;
+}
+
+#workspaces button.urgent {
+    background-color: #cf4f4f;
+    color: #ffffff;
+    border-color: #ff6b6b;
+}
+
+#window {
+    color: #777777;
+    padding-left: 8px;
+    font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   CENTER ISLAND: Military Chrono
+   -------------------------------------------------------------------------- */
+
+#clock {
+    color: #eaeaea;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding: 0 4px;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT ISLAND: Telemetry Modules
+   -------------------------------------------------------------------------- */
+
+#cpu, #temperature, #memory, #custom-gpu, #disk, #network, #pulseaudio {
+    background-color: #111111;
+    color: #b0b0b0;
+    border: 1px solid #1c1c1c;
+    padding: 0 9px;
+    margin: 3px 2px;
+}
+
+#cpu:hover, #temperature:hover, #memory:hover, #custom-gpu:hover, #disk:hover, #pulseaudio:hover {
+    background-color: #181818;
+    color: #ffffff;
+    border-color: #333333;
+}
+
+#custom-gpu {
+    color: #d8d8d8;
+    font-weight: 600;
+}
+
+#pulseaudio {
+    color: #eaeaea;
+    border-color: #2a2a2a;
+}
+
+#pulseaudio.muted {
+    color: #555555;
+    background-color: #0d0d0d;
+}
+
+#custom-theme {
+    background-color: #111111;
+    color: #eaeaea;
+    border: 1px solid #1c1c1c;
+    padding: 0 10px 0 8px;
+    margin: 3px 2px;
+    font-size: 13px;
+}
+
+#custom-theme:hover {
+    background-color: #181818;
+    color: #ffffff;
+    border-color: #333333;
+}
+
+#custom-theme.light {
+    color: #f2c94c;
+}
+
+#tray {
+    padding: 0 8px;
+    margin: 3px 2px 3px 6px;
+    background-color: #111111;
+    border: 1px solid #1c1c1c;
+}

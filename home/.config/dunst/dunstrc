@@ -1,0 +1,60 @@
+[global]
+    font = JetBrainsMono Nerd Font 10
+    format = "<b>[%s]</b>\n%b"
+    sort = yes
+    indicate_hidden = yes
+    alignment = left
+    show_age_threshold = 60
+    word_wrap = yes
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = no
+
+    ### Geometry ###
+    width = 380
+    height = (0, 200)
+    offset = (16, 48)
+    origin = top-right
+    notification_limit = 5
+
+    ### Progress bar ###
+    progress_bar = true
+    progress_bar_height = 4
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    progress_bar_corner_radius = 0
+
+    ### Styling ###
+    corner_radius = 0
+    transparency = 0
+    separator_height = 1
+    padding = 12
+    horizontal_padding = 16
+    text_icon_padding = 12
+    frame_width = 1
+    frame_color = "#eaeaea"
+    separator_color = frame
+
+    ### Colors ###
+    background = "#080808"
+    foreground = "#d8d8d8"
+
+[urgency_low]
+    background = "#080808"
+    foreground = "#888888"
+    frame_color = "#222222"
+    timeout = 4
+
+[urgency_normal]
+    background = "#080808"
+    foreground = "#d8d8d8"
+    frame_color = "#eaeaea"
+    timeout = 6
+
+[urgency_critical]
+    background = "#140505"
+    foreground = "#ffffff"
+    frame_color = "#cf4f4f"
+    timeout = 0

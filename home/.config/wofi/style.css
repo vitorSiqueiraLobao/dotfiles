@@ -1,0 +1,74 @@
+/* ==========================================================================
+   ARES MAINFRAME // WOFI TITANIUM MONOLITH
+   ========================================================================== */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+window {
+    background-color: #080808;
+    border: 1px solid #333333;
+    margin: 0px;
+    padding: 10px;
+}
+
+#outer-box {
+    margin: 0px;
+    padding: 0px;
+    background-color: #080808;
+}
+
+#input {
+    margin: 4px 4px 12px 4px;
+    padding: 8px 12px;
+    border: 1px solid #222222;
+    background-color: #0f0f0f;
+    color: #ffffff;
+}
+
+#input:focus {
+    border: 1px solid #eaeaea;
+    outline: none;
+}
+
+#scroll {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+#inner-box {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background-color: transparent;
+}
+
+#entry {
+    padding: 6px 12px;
+    margin: 2px 4px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: #888888;
+}
+
+#entry:selected {
+    background-color: #eaeaea;
+    color: #050505;
+    border: 1px solid #ffffff;
+    font-weight: bold;
+}
+
+#text {
+    margin: 0px;
+    color: inherit;
+}
+
+#text:selected {
+    color: #050505;
+    font-weight: bold;
+}
