@@ -16,6 +16,25 @@ ciano = dados), fonte IBM 3270 Nerd Font, visual retrô/cyberpunk.
 - **Waybar**: medidores ASCII, mixer de volume por app, toggle claro/escuro e menu do
   sistema no badge ARES (bloquear, suspender, logout, reiniciar, desligar).
 
+## Prints
+
+**Tela de bloqueio — Breach Protocol** (início da animação de desbloqueio, que reproduz o HUD do hyprlock)
+![Breach Protocol HUD](docs/screenshots/lockscreen_hud.png)
+
+**Desbloqueio — BREACH SUCCESSFUL** (matriz resolvida, buffer cheio, daemons instalados)
+![Breach successful](docs/screenshots/breach_success.png)
+
+**Barra** (badge ARES, relógio, medidores ASCII, mixer e tema)
+![Waybar](docs/screenshots/waybar.png)
+
+| Lançador (Super+Espaço) | Notificações |
+|---|---|
+| ![Lançador](docs/screenshots/launcher.png) | ![Notificações](docs/screenshots/notifications.png) |
+
+| Menu do sistema (badge ARES) | Mixer de volume | Terminal |
+|---|---|---|
+| ![Menu do sistema](docs/screenshots/power_menu.png) | ![Mixer](docs/screenshots/mixer.png) | ![Terminal](docs/screenshots/terminal.png) |
+
 ## Efeitos sonoros
 
 Painéis, notificações, bloqueio e desbloqueio tocam sons via `ares_sfx.py`. O repo traz um
