@@ -1,4 +1,5 @@
 antigravity
 claude-code
 claude-desktop
+hunspell-pt-br
 yay

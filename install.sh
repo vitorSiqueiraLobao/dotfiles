@@ -34,8 +34,29 @@ link_home() {
     done
 }
 
+# ---------------------------------------------------------------------------
+# Firefox: user.js no perfil padrão (o nome do perfil muda a cada instalação)
+# ---------------------------------------------------------------------------
+link_firefox() {
+    local ini="$HOME/.config/mozilla/firefox/installs.ini"
+    if [ ! -f "$ini" ]; then
+        echo "  firefox: abra o Firefox uma vez e rode ./install.sh --links de novo"
+        return
+    fi
+    local profile dst
+    profile=$(grep -m1 '^Default=' "$ini" | cut -d= -f2)
+    dst="$HOME/.config/mozilla/firefox/$profile/user.js"
+    if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$DOTFILES/firefox/user.js" ]; then
+        return
+    fi
+    [ -e "$dst" ] && mv "$dst" "$dst.bak"
+    ln -s "$DOTFILES/firefox/user.js" "$dst"
+    echo "  link:   firefox/$profile/user.js"
+}
+
 if [ "${1:-}" = "--links" ]; then
     link_home
+    link_firefox
     exit 0
 fi
 
@@ -60,6 +81,7 @@ yay -S --needed - < "$DOTFILES/pkglist-aur.txt"
 # Configs do usuário
 # ---------------------------------------------------------------------------
 link_home
+link_firefox
 
 # ---------------------------------------------------------------------------
 # Sistema (/etc) — HDMI 2.1 FRL no amdgpu (240 Hz via HDMI)

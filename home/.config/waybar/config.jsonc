@@ -23,7 +23,6 @@
         "custom/gpu",
         "disk",
         "network",
-        "pulseaudio",
         "custom/mixer",
         "custom/theme",
         "tray"
@@ -98,18 +97,11 @@
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
     },
 
-    "pulseaudio": {
-        "format": "VOL::{volume}%",
-        "format-muted": "VOL::MUTED",
-        "scroll-step": 5,
-        "on-click": "/home/w0lf/.config/waybar/scripts/toggle_audio_mixer.sh",
-        "on-click-right": "/home/w0lf/.config/waybar/scripts/switch_audio_output.sh"
-    },
-
     "custom/mixer": {
         "format": "󰕾",
         "tooltip-format": "Mixer de volume",
-        "on-click": "$HOME/.config/waybar/scripts/volume_mixer.py"
+        "on-click": "$HOME/.config/waybar/scripts/volume_mixer.py",
+        "on-click-right": "$HOME/.config/waybar/scripts/switch_audio_output.sh"
     },
 
     "custom/theme": {

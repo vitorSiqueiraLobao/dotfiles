@@ -15,3 +15,6 @@ PS1='\[\e[38;2;110;110;110m\]┌──[\[\e[38;2;240;240;240m\]\u@\h\[\e[38;2;11
 
 
 
+
+# Fastfetch ao abrir o terminal
+command -v fastfetch >/dev/null && fastfetch

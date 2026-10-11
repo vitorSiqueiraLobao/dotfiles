@@ -107,7 +107,7 @@ window#waybar {
    RIGHT ISLAND: Telemetry Modules
    -------------------------------------------------------------------------- */
 
-#cpu, #temperature, #memory, #custom-gpu, #disk, #network, #pulseaudio {
+#cpu, #temperature, #memory, #custom-gpu, #disk, #network {
     background-color: #111111;
     color: #b0b0b0;
     border: 1px solid #1c1c1c;
@@ -115,7 +115,7 @@ window#waybar {
     margin: 3px 2px;
 }
 
-#cpu:hover, #temperature:hover, #memory:hover, #custom-gpu:hover, #disk:hover, #pulseaudio:hover {
+#cpu:hover, #temperature:hover, #memory:hover, #custom-gpu:hover, #disk:hover {
     background-color: #181818;
     color: #ffffff;
     border-color: #333333;
@@ -124,16 +124,6 @@ window#waybar {
 #custom-gpu {
     color: #d8d8d8;
     font-weight: 600;
-}
-
-#pulseaudio {
-    color: #eaeaea;
-    border-color: #2a2a2a;
-}
-
-#pulseaudio.muted {
-    color: #555555;
-    background-color: #0d0d0d;
 }
 
 #custom-mixer, #custom-theme {

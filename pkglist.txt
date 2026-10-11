@@ -13,6 +13,7 @@ grim
 gst-plugin-pipewire
 gtk4-layer-shell
 htop
+hunspell-en_us
 hyprland
 hyprlock
 hyprpaper
