@@ -7,6 +7,8 @@
 
 pgrep -x hyprlock >/dev/null && exit 0
 
+"$HOME/.config/hypr/scripts/ares_sfx.py" lock
+
 "$HOME/.config/hypr/scripts/breach_success.py" --wait &
 anim=$!
 

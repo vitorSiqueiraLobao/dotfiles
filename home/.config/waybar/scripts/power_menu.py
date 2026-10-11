@@ -6,10 +6,14 @@
 # Deps: python-gobject gtk4 gtk4-layer-shell
 
 import os
+import sys
 import subprocess
 from ctypes import CDLL
 
 CDLL("libgtk4-layer-shell.so")  # precisa carregar antes do GTK
+
+sys.path.insert(0, os.path.expanduser("~/.config/hypr/scripts"))
+import ares_sfx  # noqa: E402
 
 import gi
 
@@ -89,6 +93,7 @@ class PowerMenu(Gtk.Application):
 
     def do_activate(self):
         if self.win is not None:  # segunda execução = fechar
+            ares_sfx.play("close")
             self.quit()
             return
 
@@ -150,6 +155,7 @@ class PowerMenu(Gtk.Application):
         self.win.set_child(panel)
         self.win.present()
         self.buttons[0].grab_focus()
+        ares_sfx.play("open")
 
     def disarm(self):
         if self.armed is not None:
@@ -162,19 +168,23 @@ class PowerMenu(Gtk.Application):
         if confirm and self.armed is not btn:
             self.disarm()
             self.armed = btn
+            ares_sfx.play("error")
             btn.add_css_class("confirm")
             btn.label_widget.set_text(f"{btn.label_text} — CONFIRMAR?")
             GLib.timeout_add(3000, lambda: self.disarm() if self.armed is btn else False)
             return
+        ares_sfx.play("select")
         self.win.set_visible(False)
         subprocess.Popen(cmd, start_new_session=True)
         self.quit()
 
     def on_key(self, _ctrl, keyval, _code, _state):
         if keyval == Gdk.KEY_Escape:
+            ares_sfx.play("close")
             self.quit()
             return True
         if keyval in (Gdk.KEY_Down, Gdk.KEY_Up, Gdk.KEY_j, Gdk.KEY_k):
+            ares_sfx.play("nav")
             focused = self.win.get_focus()
             i = self.buttons.index(focused) if focused in self.buttons else 0
             step = 1 if keyval in (Gdk.KEY_Down, Gdk.KEY_j) else -1

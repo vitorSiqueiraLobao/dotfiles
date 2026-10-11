@@ -25,6 +25,9 @@ from ctypes import CDLL
 
 CDLL("libgtk4-layer-shell.so")  # precisa carregar antes do GTK
 
+sys.path.insert(0, os.path.expanduser("~/.config/hypr/scripts"))
+import ares_sfx  # noqa: E402
+
 import gi
 
 gi.require_version("Gtk", "4.0")
@@ -278,7 +281,9 @@ class Breach(Gtk.Application):
             self.matrix_acc += TICK_MS
             while self.matrix_acc >= MATRIX_STEP_MS and self.state["phase"] != "done":
                 self.matrix_acc -= MATRIX_STEP_MS
+                before = len(self.state["buffer"])
                 self.state = matrix.step(self.state)
+                ares_sfx.play("pick" if len(self.state["buffer"]) > before else "key", volume=None)
             self.matrix_label.set_markup(matrix.render(self.state))
             picked = self.state["buffer"]
             slots = picked + ["__"] * (matrix.PICKS - len(picked))
@@ -297,6 +302,7 @@ class Breach(Gtk.Application):
 
         # 2) BREACH SUCCESSFUL no lugar do relógio
         if self.clock.get_opacity() > 0:
+            ares_sfx.play("success")
             for w in (self.clock, self.date):
                 w.set_opacity(0)
             self.success.set_opacity(1)

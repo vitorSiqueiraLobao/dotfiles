@@ -9,9 +9,13 @@
 
 import json
 import os
+import sys
 from ctypes import CDLL
 
 CDLL("libgtk4-layer-shell.so")  # precisa carregar antes do GTK
+
+sys.path.insert(0, os.path.expanduser("~/.config/hypr/scripts"))
+import ares_sfx  # noqa: E402
 
 import gi
 
@@ -195,6 +199,7 @@ class Launcher(Gtk.Application):
 
     def do_activate(self):
         if self.win is not None:  # segunda execução = fechar
+            ares_sfx.play("close")
             self.quit()
             return
 
@@ -230,7 +235,7 @@ class Launcher(Gtk.Application):
         prompt = Gtk.Label(label=">")
         prompt.add_css_class("prompt")
         self.entry = Gtk.Text(hexpand=True, placeholder_text="buscar daemon_")
-        self.entry.connect("changed", lambda *_: self.refresh())
+        self.entry.connect("changed", lambda *_: (ares_sfx.play("key"), self.refresh()))
         self.entry.connect("activate", lambda *_: self.launch_selected())
         keys = Gtk.EventControllerKey(propagation_phase=Gtk.PropagationPhase.CAPTURE)
         keys.connect("key-pressed", self.on_key)
@@ -293,6 +298,7 @@ class Launcher(Gtk.Application):
         self.refresh()
         self.win.present()
         self.entry.grab_focus()
+        ares_sfx.play("open")
 
     # --- Lista ---------------------------------------------------------------
     def refresh(self):
@@ -372,9 +378,11 @@ class Launcher(Gtk.Application):
     # --- Ações ---------------------------------------------------------------
     def on_key(self, _ctrl, keyval, _code, _state):
         if keyval == Gdk.KEY_Escape:
+            ares_sfx.play("close")
             self.quit()
             return True
         if keyval in (Gdk.KEY_Down, Gdk.KEY_Up, Gdk.KEY_Page_Down, Gdk.KEY_Page_Up):
+            ares_sfx.play("nav")
             row = self.list.get_selected_row()
             i = row.get_index() if row else 0
             step = {Gdk.KEY_Down: 1, Gdk.KEY_Up: -1, Gdk.KEY_Page_Down: 8, Gdk.KEY_Page_Up: -8}[keyval]
@@ -393,6 +401,7 @@ class Launcher(Gtk.Application):
             self.launch(row.app)
 
     def launch(self, app):
+        ares_sfx.play("select")
         self.counts[app.get_id()] = self.counts.get(app.get_id(), 0) + 1
         save_counts(self.counts)
         ctx = Gdk.Display.get_default().get_app_launch_context()
@@ -406,6 +415,7 @@ class Launcher(Gtk.Application):
     def on_active(self, win, _pspec):
         # clicou fora / outra janela pegou o foco: fecha
         if not win.is_active() and getattr(self, "_was_active", False):
+            ares_sfx.play("close")
             self.quit()
         self._was_active = win.is_active() or getattr(self, "_was_active", False)
 

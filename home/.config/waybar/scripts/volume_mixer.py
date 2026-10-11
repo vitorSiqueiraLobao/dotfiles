@@ -5,11 +5,16 @@
 # Deps: python-gobject gtk4 gtk4-layer-shell, pactl (pipewire-pulse)
 
 import json
+import os
 import subprocess
+import sys
 import threading
 from ctypes import CDLL
 
 CDLL("libgtk4-layer-shell.so")  # precisa carregar antes do GTK
+
+sys.path.insert(0, os.path.expanduser("~/.config/hypr/scripts"))
+import ares_sfx  # noqa: E402
 
 import gi
 
@@ -219,9 +224,11 @@ class Row(Gtk.Box):
         value = int(scale.get_value())
         self.pct.set_text(f"{value}%")
         if not self._updating:
+            ares_sfx.play("tick")
             subprocess.Popen(["pactl", f"set-{self.kind}-volume", str(self.id), f"{value}%"])
 
     def on_mute(self, _btn):
+        ares_sfx.play("nav")
         subprocess.Popen(["pactl", f"set-{self.kind}-mute", str(self.id), "toggle"])
 
 
@@ -236,6 +243,7 @@ class Mixer(Gtk.Application):
     def do_activate(self):
         # Segunda execução = fechar (toggle pelo ícone da barra)
         if self.win is not None:
+            ares_sfx.play("close")
             self.quit()
             return
 
@@ -286,6 +294,7 @@ class Mixer(Gtk.Application):
         self.win.set_child(panel)
         self.refresh()
         self.win.present()
+        ares_sfx.play("open")
 
         threading.Thread(target=self.watch, daemon=True).start()
 
@@ -296,6 +305,7 @@ class Mixer(Gtk.Application):
 
     def on_key(self, _ctrl, keyval, _code, _state):
         if keyval == Gdk.KEY_Escape:
+            ares_sfx.play("close")
             self.quit()
             return True
         return False

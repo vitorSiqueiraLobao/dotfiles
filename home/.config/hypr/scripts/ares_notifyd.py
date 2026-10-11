@@ -8,10 +8,15 @@
 # Passar o mouse pausa o tempo de expiração.
 # Deps: python-gobject gtk4 gtk4-layer-shell
 
+import os
+import sys
 import time
 from ctypes import CDLL
 
 CDLL("libgtk4-layer-shell.so")  # precisa carregar antes do GTK
+
+sys.path.insert(0, os.path.expanduser("~/.config/hypr/scripts"))
+import ares_sfx  # noqa: E402
 
 import gi
 
@@ -265,6 +270,7 @@ class Notifyd(Gtk.Application):
             self.stack.prepend(revealer)
             item = {"revealer": revealer, "timer": None}
             self.items[nid] = item
+            ares_sfx.play("alert" if critical else "notify")
             GLib.idle_add(revealer.set_reveal_child, True)
 
         if timeout < 0:

@@ -16,6 +16,16 @@ ciano = dados), fonte IBM 3270 Nerd Font, visual retrô/cyberpunk.
 - **Waybar**: medidores ASCII, mixer de volume por app, toggle claro/escuro e menu do
   sistema no badge ARES (bloquear, suspender, logout, reiniciar, desligar).
 
+## Efeitos sonoros
+
+Painéis, notificações, bloqueio e desbloqueio tocam sons via `ares_sfx.py`. O repo traz um
+pacote **sintetizado** (`home/.config/ares/sounds/`, gerado por `tools/gen_sounds.py`).
+Sons próprios (ex.: extraídos da sua cópia do Cyberpunk 2077) vão em
+`~/.local/share/ares/sounds/<nome>.(wav|ogg|flac|mp3)` — têm prioridade e **não entram no repo**
+(o `.gitignore` bloqueia por segurança). Faça backup dessa pasta à parte.
+Nomes: key nav select open close error pick success notify alert lock tick.
+Volume/desligar: `~/.config/ares/sfx.conf`.
+
 ## Instalar numa máquina nova
 
 ```bash

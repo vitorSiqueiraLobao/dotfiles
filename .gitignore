@@ -1,0 +1,14 @@
+# Sons de terceiros (ex.: extraídos do Cyberpunk 2077) ficam só na máquina, em
+# ~/.local/share/ares/sounds/ — nunca neste repo público. Travas caso sejam
+# copiados para cá por engano:
+home/.local/share/ares/
+ui_*.wav
+*cyberpunk*
+*Cyberpunk*
+*.mp3
+*.ogg
+*.flac
+
+# Lixo de Python
+__pycache__/
+*.pyc
