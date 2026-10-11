@@ -2,4 +2,5 @@ antigravity
 claude-code
 claude-desktop
 hunspell-pt-br
+mpvpaper
 yay

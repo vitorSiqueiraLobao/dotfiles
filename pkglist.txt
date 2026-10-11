@@ -29,6 +29,7 @@ limine
 linux
 linux-firmware
 mkinitcpio
+mpv
 nano
 networkmanager
 network-manager-applet
@@ -41,6 +42,7 @@ pipewire-jack
 pipewire-pulse
 polkit-kde-agent
 python-gobject
+python-numpy
 qt5-wayland
 qt6-wayland
 slurp

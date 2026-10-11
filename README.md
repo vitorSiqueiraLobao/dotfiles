@@ -13,10 +13,16 @@ ciano = dados), fonte IBM 3270 Nerd Font, visual retrô/cyberpunk.
   GTK4 com cantos cortados e o ícone do app em holograma numa moldura (substitui o dunst).
 - **Lançador próprio** (`ares_launcher.py`, Super+Espaço): HUD com cantos cortados, busca
   aproximada, apps mais usados no topo, painel DAEMON INFO e ícones em holograma.
+- **Wallpaper animado**: capacete espartano de Ares em ASCII 3D (estilo "donut ASCII"),
+  girando sobre uma grade em perspectiva com matriz hex no céu — shader GLSL no `mpvpaper`.
 - **Waybar**: medidores ASCII, mixer de volume por app, toggle claro/escuro e menu do
   sistema no badge ARES (bloquear, suspender, logout, reiniciar, desligar).
 
 ## Prints
+
+**Wallpaper animado** (capacete de Ares em ASCII 3D, grade e matriz hex)
+![Wallpaper](docs/screenshots/wallpaper.png)
+![Capacete em ASCII](docs/screenshots/wallpaper_helmet.png)
 
 **Tela de bloqueio — Breach Protocol** (início da animação de desbloqueio, que reproduz o HUD do hyprlock)
 ![Breach Protocol HUD](docs/screenshots/lockscreen_hud.png)
@@ -34,6 +40,32 @@ ciano = dados), fonte IBM 3270 Nerd Font, visual retrô/cyberpunk.
 | Menu do sistema (badge ARES) | Mixer de volume | Terminal |
 |---|---|---|
 | ![Menu do sistema](docs/screenshots/power_menu.png) | ![Mixer](docs/screenshots/mixer.png) | ![Terminal](docs/screenshots/terminal.png) |
+
+## Wallpaper animado
+
+`hypr/scripts/wallpaper.sh` roda o `mpvpaper` com o shader
+`home/.config/ares/wallpaper/ares_helmet.glsl` sobre um vídeo vazio (lavfi) do tamanho do
+monitor, a 30 FPS, pausando quando o fundo está coberto. Sem `mpvpaper`, cai no `hyprpaper`.
+
+O shader é **gerado** — edite os geradores, não o `.glsl`:
+
+```bash
+# (opcional) trocar o modelo: converte um .glb/.gltf/.zip em voxels 64³
+python3 tools/voxelize_model.py ~/Downloads/modelo.glb --size 64
+# gera o shader (embute os voxels, se existirem) e reinicia o fundo
+python3 tools/gen_wallpaper_shader.py && setsid -f ~/.config/hypr/scripts/wallpaper.sh
+```
+
+Ajustes no topo do shader gerado (via `tools/gen_wallpaper_shader.py`): `SPIN_SPEED`,
+`GRID_SPEED`, `HORIZON`, `HELMET_Y`, `HELMET_SIZE`, `VOX_ZOOM`.
+
+## Créditos
+
+- Modelo do capacete: **"3D Spartan Helmet - High Poly"** por **Manix3D**, licença
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) —
+  <https://sketchfab.com/3d-models/3d-spartan-helmet-high-poly-25e66a8915254fbc9402b0ef96a90554>.
+  Adaptado: convertido em voxels 64³ e renderizado em ASCII
+  (`home/.config/ares/wallpaper/helmet_vox.bin`, embutido no shader).
 
 ## Efeitos sonoros
 
@@ -75,6 +107,8 @@ Só os links, sem instalar nada: `./install.sh --links`
 | `home/.bashrc`, `home/.bash_profile` | Shell |
 | `home/.config/hypr/scripts/` | lock.sh + Breach Protocol (matriz, sequência, animação), notifyd, screenshot |
 | `home/.config/systemd/user/`, `home/.local/share/dbus-1/` | Ativação do ARES notifyd no lugar do dunst |
+| `home/.config/ares/wallpaper/` | Shader do wallpaper animado + voxels do capacete |
+| `tools/` | Geradores: sons, shader do wallpaper, conversor de modelo 3D |
 | `system/etc/modprobe.d/amdgpu-frl.conf` | HDMI 2.1 FRL no amdgpu (5120x1440@240 via HDMI, kernel ≥ 7.2) |
 | `system/etc/greetd/config.toml` | Login automático no Hyprland + tuigreet no logout |
 

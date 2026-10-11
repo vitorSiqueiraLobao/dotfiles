@@ -51,7 +51,7 @@ hl.on("hyprland.start", function ()
     -- Login automático: a sessão já começa travada na tela Breach Protocol
     hl.exec_cmd("$HOME/.config/hypr/scripts/lock.sh --immediate-render --no-fade-in")
     hl.exec_cmd("waybar")
-    hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("$HOME/.config/hypr/scripts/wallpaper.sh")   -- capacete de Ares em ASCII 3D (cai no hyprpaper se faltar o mpvpaper)
 end)
 
 
