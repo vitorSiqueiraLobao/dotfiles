@@ -20,26 +20,22 @@ ciano = dados), fonte IBM 3270 Nerd Font, visual retrô/cyberpunk.
 
 ## Prints
 
-**Wallpaper animado** (capacete de Ares em ASCII 3D, grade e matriz hex)
-![Wallpaper](docs/screenshots/wallpaper.png)
-![Capacete em ASCII](docs/screenshots/wallpaper_helmet.png)
+**Wallpaper animado** — capacete de Ares em ASCII 3D girando sobre a grade
+![Wallpaper](docs/gifs/wallpaper.gif)
 
-**Tela de bloqueio — Breach Protocol** (início da animação de desbloqueio, que reproduz o HUD do hyprlock)
-![Breach Protocol HUD](docs/screenshots/lockscreen_hud.png)
-
-**Desbloqueio — BREACH SUCCESSFUL** (matriz resolvida, buffer cheio, daemons instalados)
-![Breach successful](docs/screenshots/breach_success.png)
+**Desbloqueio — Breach Protocol** — a CODE MATRIX é resolvida, os daemons são instalados e aparece BREACH SUCCESSFUL
+![Breach Protocol](docs/gifs/breach.gif)
 
 **Barra** (badge ARES, relógio, medidores ASCII, mixer e tema)
 ![Waybar](docs/screenshots/waybar.png)
 
-| Lançador (Super+Espaço) | Notificações |
-|---|---|
-| ![Lançador](docs/screenshots/launcher.png) | ![Notificações](docs/screenshots/notifications.png) |
-
-| Menu do sistema (badge ARES) | Mixer de volume | Terminal |
+| Notificações | Mixer de volume | Menu do sistema |
 |---|---|---|
-| ![Menu do sistema](docs/screenshots/power_menu.png) | ![Mixer](docs/screenshots/mixer.png) | ![Terminal](docs/screenshots/terminal.png) |
+| ![Notificações](docs/gifs/notifications.gif) | ![Mixer](docs/gifs/mixer.gif) | ![Menu do sistema](docs/gifs/power_menu.gif) |
+
+| Lançador (Super+Espaço) | Terminal |
+|---|---|
+| ![Lançador](docs/screenshots/launcher.png) | ![Terminal](docs/screenshots/terminal.png) |
 
 ## Wallpaper animado
 
