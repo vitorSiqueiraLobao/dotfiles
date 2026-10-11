@@ -121,8 +121,13 @@ hl.config({
         active_opacity   = 1.0,
         inactive_opacity = 0.96,
 
+        -- brilho em volta da janela (só o kitty usa; ver regra "kitty-holo")
         shadow = {
-            enabled      = false,
+            enabled        = true,
+            range          = 14,
+            render_power   = 2,
+            color          = "rgba(00f0ff59)",
+            color_inactive = "rgba(00f0ff00)",
         },
 
         blur = {
@@ -290,6 +295,22 @@ hl.layer_rule({
     name    = "ares-breach-no-anim",
     match   = { namespace = "^ares-breach$" },
     no_anim = true,
+})
+
+-- Terminal "holograma": borda fina ciano + brilho; inativo fica mais transparente.
+-- A transparência base vem do kitty.conf (background_opacity).
+hl.window_rule({
+    name         = "kitty-holo",
+    match        = { class = "^kitty$" },
+    border_size  = 1,
+    border_color = "rgba(00f0ffff) rgba(00f0ff4d)",
+    opacity      = "1.0 0.75",
+})
+
+hl.window_rule({
+    name      = "no-glow-others",
+    match     = { class = "negative:^kitty$" },
+    no_shadow = true,
 })
 
 hl.window_rule({

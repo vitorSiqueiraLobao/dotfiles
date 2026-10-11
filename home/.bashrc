@@ -16,5 +16,8 @@ PS1='\[\e[38;2;255;31;61m\]┌──[\[\e[38;2;0;240;255m\]\u@\h\[\e[38;2;255;31
 
 
 
+# Sons ARES no kitty: digitação no prompt + som ao abrir
+[[ $TERM == xterm-kitty && -f ~/.config/ares/keysfx.bash ]] && source ~/.config/ares/keysfx.bash
+
 # Fastfetch ao abrir o terminal
 command -v fastfetch >/dev/null && fastfetch
