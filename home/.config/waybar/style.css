@@ -136,7 +136,7 @@ window#waybar {
     background-color: #0d0d0d;
 }
 
-#custom-theme {
+#custom-mixer, #custom-theme {
     background-color: #111111;
     color: #eaeaea;
     border: 1px solid #1c1c1c;
@@ -145,7 +145,7 @@ window#waybar {
     font-size: 13px;
 }
 
-#custom-theme:hover {
+#custom-mixer:hover, #custom-theme:hover {
     background-color: #181818;
     color: #ffffff;
     border-color: #333333;

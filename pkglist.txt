@@ -11,6 +11,7 @@ firefox
 git
 grim
 gst-plugin-pipewire
+gtk4-layer-shell
 htop
 hyprland
 hyprlock
@@ -25,8 +26,8 @@ linux
 linux-firmware
 mkinitcpio
 nano
-network-manager-applet
 networkmanager
+network-manager-applet
 nodejs
 npm
 pavucontrol
@@ -35,6 +36,7 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 polkit-kde-agent
+python-gobject
 qt5-wayland
 qt6-wayland
 slurp
