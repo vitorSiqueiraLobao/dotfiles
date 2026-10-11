@@ -121,6 +121,40 @@ class CutPanel(Gtk.Box):
         Gtk.Box.do_snapshot(self, snapshot)
 
 
+class TintedIcon(Gtk.Widget):
+    """Ícone redesenhado como holograma monocromático (igual ao lançador): a
+    luminosidade vira a cor do HUD e uma silhueta fraca vem da transparência.
+    Imagens não quadradas são encaixadas mantendo a proporção."""
+
+    def __init__(self, paintable, size, color):
+        super().__init__()
+        self.paintable, self.size, self.color = paintable, size, rgba(color)
+
+    def do_measure(self, orientation, for_size):
+        return self.size, self.size, -1, -1
+
+    def do_snapshot(self, snapshot):
+        s = self.size
+        ratio = self.paintable.get_intrinsic_aspect_ratio() or 1.0
+        w, h = (s, s / ratio) if ratio >= 1 else (s * ratio, s)
+        snapshot.save()
+        snapshot.translate(Graphene.Point().init((s - w) / 2, (s - h) / 2))
+        rect = Graphene.Rect().init(0, 0, w, h)
+        snapshot.push_opacity(0.35)
+        snapshot.push_mask(Gsk.MaskMode.ALPHA)
+        self.paintable.snapshot(snapshot, w, h)
+        snapshot.pop()
+        snapshot.append_color(self.color, rect)
+        snapshot.pop()
+        snapshot.pop()
+        snapshot.push_mask(Gsk.MaskMode.LUMINANCE)
+        self.paintable.snapshot(snapshot, w, h)
+        snapshot.pop()
+        snapshot.append_color(self.color, rect)
+        snapshot.pop()
+        snapshot.restore()
+
+
 class Notifyd(Gtk.Application):
     def __init__(self):
         super().__init__(application_id="ares.notifyd")
@@ -303,7 +337,7 @@ class Notifyd(Gtk.Application):
         frame.add_css_class("iconframe")
         if critical:
             frame.add_css_class("critical")
-        frame.append(self.icon_widget(app_name, app_icon, hints))
+        frame.append(self.icon_widget(app_name, app_icon, hints, critical))
         right = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         right.append(frame)
         ident = Gtk.Label(label=f"{nid:02d}", xalign=1)
@@ -325,8 +359,25 @@ class Notifyd(Gtk.Application):
         slot.append(card)
         return slot
 
-    def icon_widget(self, app_name, app_icon, hints):
-        img = Gtk.Image(pixel_size=40, halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER, hexpand=True)
+    def icon_widget(self, app_name, app_icon, hints, critical):
+        """Ícone no estilo holograma do HUD: ciano (ou vermelho se crítica)."""
+        paintable = self.icon_paintable(app_name, app_icon, hints)
+        if paintable is None:  # sem ícone: símbolo genérico
+            glyph = Gtk.Label(label="\U000F009A", hexpand=True)  # nf-md-bell
+            glyph.add_css_class("glyph")
+            return glyph
+        icon = TintedIcon(paintable, 40, RED if critical else CYAN)
+        icon.set_halign(Gtk.Align.CENTER)
+        icon.set_valign(Gtk.Align.CENTER)
+        icon.set_hexpand(True)
+        return icon
+
+    def icon_paintable(self, app_name, app_icon, hints):
+        theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
+
+        def themed(name):
+            return theme.lookup_icon(name, None, 40, 2, Gtk.TextDirection.NONE, 0)
+
         # 1) imagem enviada pelo app (bytes)
         for key in ("image-data", "image_data", "icon_data"):
             v = hints.lookup_value(key, None)
@@ -336,8 +387,7 @@ class Notifyd(Gtk.Application):
                     alpha = v.get_child_value(3).get_boolean()
                     data = v.get_child_value(6).get_data_as_bytes()
                     pix = GdkPixbuf.Pixbuf.new_from_bytes(data, GdkPixbuf.Colorspace.RGB, alpha, 8, w, h, stride)
-                    img.set_from_paintable(Gdk.Texture.new_for_pixbuf(pix))
-                    return img
+                    return Gdk.Texture.new_for_pixbuf(pix)
                 except (GLib.Error, TypeError, ValueError):
                     pass
         # 2) caminho de imagem ou nome de ícone
@@ -348,20 +398,17 @@ class Notifyd(Gtk.Application):
             if src.startswith("file://"):
                 src = src[7:]
             if src.startswith("/"):
-                img.set_from_file(src)
-                return img
-            if self.has_icon(src):
-                img.set_from_icon_name(src)
-                return img
+                try:
+                    return Gdk.Texture.new_from_filename(src)
+                except GLib.Error:
+                    continue
+            if theme.has_icon(src):
+                return themed(src)
         # 3) ícone pelo nome do app
         for guess in (app_name.lower(), app_name.lower().replace(" ", "-")):
-            if self.has_icon(guess):
-                img.set_from_icon_name(guess)
-                return img
-        # 4) sem ícone: símbolo genérico
-        glyph = Gtk.Label(label="\U000F009A", hexpand=True)  # nf-md-bell
-        glyph.add_css_class("glyph")
-        return glyph
+            if theme.has_icon(guess):
+                return themed(guess)
+        return None
 
     def has_icon(self, name):
         theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())

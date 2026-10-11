@@ -10,7 +10,9 @@ ciano = dados), fonte IBM 3270 Nerd Font, visual retrô/cyberpunk.
   continua o HUD: a CODE MATRIX é resolvida, os daemons são instalados e aparece
   BREACH SUCCESSFUL. Logout cai no tuigreet.
 - **Notificações próprias** (`ares_notifyd.py`): servidor org.freedesktop.Notifications em
-  GTK4 com cantos cortados e o ícone do app numa moldura (substitui o dunst).
+  GTK4 com cantos cortados e o ícone do app em holograma numa moldura (substitui o dunst).
+- **Lançador próprio** (`ares_launcher.py`, Super+Espaço): HUD com cantos cortados, busca
+  aproximada, apps mais usados no topo, painel DAEMON INFO e ícones em holograma.
 - **Waybar**: medidores ASCII, mixer de volume por app, toggle claro/escuro e menu do
   sistema no badge ARES (bloquear, suspender, logout, reiniciar, desligar).
 

@@ -265,7 +265,7 @@ local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("pkill -x wofi || wofi --show drun"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/ares_launcher.py"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/lock.sh"))
 hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("kitty --class btop-term -e btop"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("/home/w0lf/.config/hypr/reload.sh"))
@@ -279,6 +279,13 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Animação de desbloqueio (Breach Protocol): aparece instantânea, sem o fade das
 -- camadas, para o desktop não vazar entre o hyprlock e a animação
+-- Lançador ARES: escurece o resto da tela enquanto está aberto
+hl.layer_rule({
+    name       = "ares-launcher-dim",
+    match      = { namespace = "^ares-launcher$" },
+    dim_around = true,
+})
+
 hl.layer_rule({
     name    = "ares-breach-no-anim",
     match   = { namespace = "^ares-breach$" },
