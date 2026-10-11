@@ -9,6 +9,7 @@ efibootmgr
 fastfetch
 firefox
 git
+gnome-text-editor
 grim
 gst-plugin-pipewire
 gtk4-layer-shell
