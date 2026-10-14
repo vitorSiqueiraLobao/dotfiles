@@ -83,6 +83,13 @@ yay -S --needed - < "$DOTFILES/pkglist-aur.txt"
 link_home
 link_firefox
 
+info "VS Code: tema ARES Cyber-Red"
+if command -v code >/dev/null; then
+    python3 "$DOTFILES/tools/gen_vscode_theme.py" --install
+else
+    echo "  code não encontrado — depois rode: python3 tools/gen_vscode_theme.py --install"
+fi
+
 # ---------------------------------------------------------------------------
 # Sistema (/etc) — HDMI 2.1 FRL no amdgpu (240 Hz via HDMI)
 # ---------------------------------------------------------------------------
