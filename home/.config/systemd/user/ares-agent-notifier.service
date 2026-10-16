@@ -1,0 +1,13 @@
+[Unit]
+Description=ARES Agent Terminal Notifier (Alerta quando o terminal requer OK)
+PartOf=graphical-session.target
+After=graphical-session.target ares-notifyd.service
+
+[Service]
+Type=simple
+ExecStart=%h/.config/hypr/scripts/ares_agent_notifier.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

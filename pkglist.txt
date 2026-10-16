@@ -21,6 +21,7 @@ gst-plugin-pipewire
 gtk4-layer-shell
 htop
 hunspell-en_us
+hypridle
 hyprland
 hyprlock
 hyprpaper
@@ -74,4 +75,5 @@ xf86-video-ati
 xf86-video-nouveau
 yazi
 zoxide
+zsh
 zram-generator

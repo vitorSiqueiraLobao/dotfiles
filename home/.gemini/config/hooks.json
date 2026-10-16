@@ -1,0 +1,15 @@
+{
+  "user-attention-alert": {
+    "PreToolUse": [
+      {
+        "matcher": "ask_question",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/w0lf/.local/bin/ares-alert-hook"
+          }
+        ]
+      }
+    ]
+  }
+}

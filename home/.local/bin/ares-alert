@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# ARES // NOTIFY ALERT (Terminal & AI Agent Integration)
+# Dispara notificação no HUD ARES (ares-notifyd) com o som padrão (notify.wav)
+# e expiração automática após 5 segundos.
+# ==============================================================================
+
+TITLE="${1:-TERMINAL // CONFIRMAÇÃO REQUERIDA}"
+BODY="${2:-O assistente precisa do seu OK ou resposta no terminal para continuar.}"
+URGENCY="${3:-normal}"
+TIMEOUT="${4:-5000}"
+
+# 1. Envia notificação D-Bus para o ares-notifyd (urgência normal toca notify.wav e expira em 5s)
+if command -v notify-send >/dev/null 2>&1; then
+    notify-send \
+        -a "ARES // AGENT" \
+        -u "$URGENCY" \
+        -t "$TIMEOUT" \
+        -i "utilities-terminal" \
+        "$TITLE" \
+        "$BODY"
+fi

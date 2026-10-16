@@ -101,6 +101,7 @@ sudo mkinitcpio -P
 info "Notificações: ARES notifyd no lugar do dunst"
 systemctl --user daemon-reload
 systemctl --user mask dunst.service
+systemctl --user enable ares-agent-notifier.service
 
 info "Login: greetd (autologin + hyprlock Breach Protocol)"
 sudo systemctl disable cosmic-greeter.service 2>/dev/null || true
