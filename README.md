@@ -15,6 +15,9 @@ ciano = dados), fonte IBM 3270 Nerd Font, visual retrô/cyberpunk.
   aproximada, apps mais usados no topo, painel DAEMON INFO e ícones em holograma.
 - **Wallpaper animado**: capacete espartano de Ares em ASCII 3D (estilo "donut ASCII"),
   girando sobre uma grade em perspectiva com matriz hex no céu — shader GLSL no `mpvpaper`.
+- **VS Code**: tema ARES Cyber-Red com fundo preto puro (OLED) e sintaxe multicolor — vermelho nas
+  declarações, ciano nas funções, menta nas strings, âmbar nos números, rosa no fluxo. Gerado por
+  `tools/gen_vscode_theme.py` (veja abaixo).
 - **Waybar**: medidores ASCII, mixer de volume por app, toggle claro/escuro e menu do
   sistema no badge ARES (bloquear, suspender, logout, reiniciar, desligar).
 
@@ -54,6 +57,19 @@ python3 tools/gen_wallpaper_shader.py && setsid -f ~/.config/hypr/scripts/wallpa
 
 Ajustes no topo do shader gerado (via `tools/gen_wallpaper_shader.py`): `SPIN_SPEED`,
 `GRID_SPEED`, `HORIZON`, `HELMET_Y`, `HELMET_SIZE`, `VOX_ZOOM`.
+
+## Tema do VS Code
+
+Mesma paleta do kitty/yazi/waybar, só que com todas as superfícies em `#000000` (pixel apagado na
+tela OLED); as áreas se separam por linhas vermelhas finas. O tema é **gerado** — edite a paleta e
+as regras de sintaxe em `tools/gen_vscode_theme.py`, não o JSON:
+
+```bash
+python3 tools/gen_vscode_theme.py --install   # gera, empacota em .vsix e instala no VS Code
+```
+
+O `settings.json` do VS Code (`home/.config/Code/User/`) já seleciona o tema, a fonte 3270 e o
+cursor em bloco. Fica na extensão em `home/.config/ares/vscode/ares-cyber-red/`.
 
 ## Créditos
 
@@ -104,7 +120,7 @@ Só os links, sem instalar nada: `./install.sh --links`
 | `home/.config/hypr/scripts/` | lock.sh + Breach Protocol (matriz, sequência, animação), notifyd, screenshot |
 | `home/.config/systemd/user/`, `home/.local/share/dbus-1/` | Ativação do ARES notifyd no lugar do dunst |
 | `home/.config/ares/wallpaper/` | Shader do wallpaper animado + voxels do capacete |
-| `tools/` | Geradores: sons, shader do wallpaper, conversor de modelo 3D |
+| `tools/` | Geradores: sons, shader do wallpaper, tema do VS Code, conversor de modelo 3D |
 | `system/etc/modprobe.d/amdgpu-frl.conf` | HDMI 2.1 FRL no amdgpu (5120x1440@240 via HDMI, kernel ≥ 7.2) |
 | `system/etc/greetd/config.toml` | Login automático no Hyprland + tuigreet no logout |
 

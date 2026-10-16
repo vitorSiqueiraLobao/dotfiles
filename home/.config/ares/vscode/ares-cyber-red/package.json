@@ -1,0 +1,23 @@
+{
+  "name": "ares-cyber-red",
+  "displayName": "ARES Cyber-Red",
+  "description": "Tema ARES MAINFRAME: vermelho (estrutura) + ciano (dados) sobre vermelho-preto, igual ao resto do sistema.",
+  "version": "1.0.0",
+  "publisher": "ares",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "ARES Cyber-Red",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ares-cyber-red-color-theme.json"
+      }
+    ]
+  }
+}

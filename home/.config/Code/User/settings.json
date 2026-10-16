@@ -1,0 +1,20 @@
+{
+    "files.autoSave": "afterDelay",
+    "workbench.activityBar.location": "top",
+    "workbench.sideBar.location": "right",
+
+    // ARES Cyber-Red: tema gerado por tools/gen_vscode_theme.py (fundo preto puro p/ OLED)
+    "workbench.colorTheme": "ARES Cyber-Red",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.fontFamily": "'3270 Nerd Font', monospace",
+    "editor.fontSize": 20,
+    "editor.fontLigatures": false,
+    "editor.cursorStyle": "block",
+    "editor.cursorBlinking": "blink",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "terminal.integrated.cursorStyle": "block",
+    "terminal.integrated.cursorBlinking": true,
+    "workbench.iconTheme": "helium-icon-theme",
+    "security.promptForLocalFileProtocolHandling": false
+}
