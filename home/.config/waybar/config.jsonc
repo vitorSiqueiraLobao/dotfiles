@@ -23,6 +23,7 @@
         "custom/gpu",
         "disk",
         "network",
+        "custom/claude",
         "custom/mixer",
         "custom/theme",
         "tray"
@@ -107,6 +108,14 @@
         "format-ethernet": "NET <span color='#00f0ff'>ETH</span>",
         "format-disconnected": "NET <span color='#ff1f3d'>OFF</span>",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    // Limites do Claude (5h / semanal), alimentados pela barra de status do Claude Code
+    "custom/claude": {
+        "exec": "$HOME/.config/waybar/scripts/claude_limits.py --waybar",
+        "return-type": "json",
+        "interval": 30,
+        "on-click": "$HOME/.config/waybar/scripts/claude_limits.py"
     },
 
     "custom/mixer": {
