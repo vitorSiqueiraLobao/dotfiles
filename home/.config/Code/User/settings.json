@@ -16,5 +16,7 @@
     "terminal.integrated.cursorStyle": "block",
     "terminal.integrated.cursorBlinking": true,
     "workbench.iconTheme": "helium-icon-theme",
-    "security.promptForLocalFileProtocolHandling": false
+    "security.promptForLocalFileProtocolHandling": false,
+    "intersystems.language-server.suggestTheme": false,
+    "objectscript.showProposedApiPrompt": false
 }
