@@ -29,7 +29,8 @@ __ares_sfx_key=$(__ares_sfx_file key)
 
 __ares_play() {  # $1 = caminho; toca solto, sem mensagens de job
     [[ $__ares_sfx_on == 1 && -n $1 ]] || return
-    ( pw-play --latency 20ms --volume "$__ares_sfx_vol" "$1" >/dev/null 2>&1 & )
+    # -P marca o stream: o mixer de volume ignora quem tem ares.sfx
+    ( pw-play -P '{ ares.sfx=true }' --latency 20ms --volume "$__ares_sfx_vol" "$1" >/dev/null 2>&1 & )
 }
 
 __ares_ins() {  # $1 = código hex do caractere digitado

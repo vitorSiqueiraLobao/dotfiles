@@ -142,6 +142,38 @@ def volume_percent(vol):
     return round(sum(int(c["value_percent"].rstrip("%")) for c in channels) / len(channels))
 
 
+def read_playing():
+    """Títulos de mídia tocando agora via MPRIS: {app em minúsculas: [títulos]}.
+    O Firefox não diz qual stream é de qual aba; o MPRIS só dá a mídia ativa."""
+    out = subprocess.run(
+        ["playerctl", "-a", "metadata", "--format", "{{playerName}}\t{{status}}\t{{title}}"],
+        capture_output=True, text=True,
+    ).stdout
+    playing = {}
+    for line in out.splitlines():
+        parts = line.split("\t", 2)
+        if len(parts) == 3 and parts[1] == "Playing" and parts[2].strip():
+            playing.setdefault(parts[0].lower(), []).append(parts[2].strip())
+    return playing
+
+
+def label_apps(apps):
+    """Põe o título da mídia no nome quando dá pra ter certeza (1 stream ↔ 1 player);
+    com vários streams do mesmo app, numera as linhas (#1 = mais antigo)."""
+    groups = {}
+    for a in apps:
+        groups.setdefault(a["app"], []).append(a)
+    playing = read_playing() if apps else {}
+    for app, streams in groups.items():
+        titles = playing.get(app, [])
+        if len(streams) == 1:
+            if len(titles) == 1 and not streams[0]["detailed"]:
+                streams[0]["name"] += f" — {titles[0]}"
+        else:
+            for n, a in enumerate(streams, 1):
+                a["name"] += f" #{n}"
+
+
 def read_state():
     """Saída padrão + streams de apps."""
     default = pactl("get-default-sink").strip()
@@ -158,17 +190,23 @@ def read_state():
     apps = []
     for s in pactl_json("list", "sink-inputs"):
         p = s.get("properties", {})
+        if p.get("ares.sfx"):  # efeitos sonoros do próprio ARES (ares_sfx.py / keysfx.bash)
+            continue
         name = p.get("application.name") or p.get("media.name") or f"Stream {s['index']}"
         media = p.get("media.name", "")
-        if media and media not in (name, "(null)", "AudioStream", "Playback", "audio stream"):
+        detailed = bool(media) and media not in (name, "(null)", "AudioStream", "Playback", "audio stream")
+        if detailed:
             name = f"{name} — {media}"
         apps.append({
             "key": f"in{s['index']}",
             "id": s["index"],
             "name": name,
+            "detailed": detailed,  # o app já informa a mídia no media.name (ex.: Spotify)
+            "app":(p.get("application.process.binary") or p.get("application.name") or "").lower(),
             "volume": volume_percent(s["volume"]),
             "mute": s["mute"],
         })
+    label_apps(apps)
     return sink, apps
 
 

@@ -55,7 +55,9 @@ def play(name, volume=None):
             vol = cfg["volume"] if volume is None else volume * cfg["volume"]
             try:
                 subprocess.Popen(
-                    ["pw-play", "--latency", "20ms", "--volume", f"{vol:.2f}", path],
+                    # -P marca o stream: o mixer de volume ignora quem tem ares.sfx
+                    ["pw-play", "-P", "{ ares.sfx=true }", "--latency", "20ms",
+                     "--volume", f"{vol:.2f}", path],
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True,
                 )
             except OSError:
