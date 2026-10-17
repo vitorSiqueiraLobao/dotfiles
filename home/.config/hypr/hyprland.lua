@@ -235,7 +235,7 @@ hl.config({
         kb_options = "",
         kb_rules   = "",
 
-        follow_mouse = 1,
+        follow_mouse = 2,  -- foco só no clique (passar o mouse por cima não seleciona; a rolagem ainda vai para a janela sob o cursor)
 
         sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
