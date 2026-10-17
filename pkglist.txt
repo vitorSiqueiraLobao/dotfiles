@@ -42,6 +42,7 @@ network-manager-applet
 networkmanager
 nodejs
 npm
+papirus-icon-theme
 pavucontrol
 pipewire
 pipewire-alsa

@@ -3,4 +3,5 @@ claude-code
 claude-desktop
 hunspell-pt-br
 mpvpaper
+papirus-folders
 yay

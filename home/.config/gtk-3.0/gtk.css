@@ -84,3 +84,156 @@ combobox, entry {
 combobox:focus, entry:focus {
     border-color: #eaeaea;
 }
+
+/* ---- SELETOR DE ARQUIVOS / DIÁLOGOS (xdg-desktop-portal-gtk) // paleta ARES Cyber-Red ---- */
+/* bg #08060a · painel #100a0e · borda #3a1018 · texto #e8e2e4 · dim #7a6f73 · acento #ff1f3d */
+
+filechooser, dialog, dialog .dialog-vbox, actionbar {
+    background-color: #08060a;
+    color: #e8e2e4;
+}
+
+actionbar {
+    border-top: 1px solid #3a1018;
+}
+
+.view, treeview.view, iconview, textview text, list, scrolledwindow, viewport {
+    background-color: #08060a;
+    color: #e8e2e4;
+}
+
+placessidebar, placessidebar list, placessidebar .sidebar, .sidebar {
+    background-color: #0b070c;
+    color: #7a6f73;
+    border-right: 1px solid #3a1018;
+}
+
+placessidebar row {
+    padding: 2px 4px;
+    color: #7a6f73;
+}
+
+placessidebar row:hover {
+    background-color: #1a0d12;
+    color: #e8e2e4;
+}
+
+placessidebar row:selected {
+    background-color: #3a1018;
+    color: #ff1f3d;
+    border-left: 2px solid #ff1f3d;
+}
+
+.view:hover, treeview.view:hover, row:hover {
+    background-color: #1a0d12;
+}
+
+.view:selected, .view:selected:focus, treeview.view:selected, iconview:selected,
+row:selected, row:selected:focus, selection {
+    background-color: #ff1f3d;
+    color: #08060a;
+}
+
+treeview header button {
+    background-color: #100a0e;
+    color: #7a6f73;
+    border: none;
+    border-bottom: 1px solid #3a1018;
+    border-right: 1px solid #1a0d12;
+    border-radius: 0;
+    font-weight: 700;
+}
+
+treeview header button:hover {
+    background-color: #1a0d12;
+    color: #e8e2e4;
+}
+
+/* barra de caminho (home > Documents > ...) */
+.path-bar button, .linked > button {
+    background-color: #100a0e;
+    color: #e8e2e4;
+    border: 1px solid #3a1018;
+}
+
+.path-bar button:checked, .linked > button:checked {
+    background-color: #3a1018;
+    color: #ff1f3d;
+    border-color: #ff1f3d;
+}
+
+.path-bar button:hover, .linked > button:hover {
+    background-color: #ff1f3d;
+    color: #08060a;
+    border-color: #ff1f3d;
+}
+
+button.suggested-action {
+    background-color: #ff1f3d;
+    color: #08060a;
+    border-color: #ff1f3d;
+    font-weight: 700;
+}
+
+button.suggested-action:hover {
+    background-color: #08060a;
+    color: #ff1f3d;
+}
+
+button.destructive-action {
+    background-color: #8f1426;
+    color: #e8e2e4;
+    border-color: #ff1f3d;
+}
+
+entry:focus, combobox:focus, searchentry:focus {
+    border-color: #ff1f3d;
+}
+
+popover, popover.background, menu, .menu, .popup {
+    background-color: #100a0e;
+    color: #e8e2e4;
+    border: 1px solid #3a1018;
+}
+
+menuitem:hover, modelbutton:hover {
+    background-color: #ff1f3d;
+    color: #08060a;
+}
+
+separator {
+    background-color: #3a1018;
+    min-height: 1px;
+    min-width: 1px;
+}
+
+scrollbar, scrollbar trough {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar slider {
+    background-color: #3a1018;
+    border-radius: 0;
+    min-width: 6px;
+    min-height: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: #ff1f3d;
+}
+
+/* o tema padrão pinta botões com gradiente (background-image) por cima do background-color */
+button, button.suggested-action, button.destructive-action, .path-bar button, treeview header button {
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+/* sem sombra/margem de CSD: o tema padrão reserva ~25px transparentes em volta de diálogos flutuantes,
+   e a borda do Hyprland (que usa a janela inteira) fica descolada do conteúdo */
+decoration, window.csd, window.csd decoration, window.popup decoration, tooltip decoration {
+    box-shadow: none;
+    margin: 0;
+    border-radius: 0;
+}
