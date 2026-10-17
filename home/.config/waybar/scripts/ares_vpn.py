@@ -142,6 +142,7 @@ gi.require_version("Gdk", "4.0")
 gi.require_version("Gtk4LayerShell", "1.0")
 from gi.repository import Gdk, GLib, Gtk, Pango  # noqa: E402
 from gi.repository import Gtk4LayerShell as LayerShell  # noqa: E402
+import ares_backdrop  # noqa: E402
 
 CSS = """
 window.vpn { background-color: transparent; border: none; box-shadow: none; }
@@ -392,6 +393,7 @@ class VpnPanel(Gtk.Application):
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
+        ares_backdrop.attach(self, self.dismiss)  # antes do painel, para ficar por baixo
         self.win = Gtk.ApplicationWindow(application=self)
         self.win.add_css_class("vpn")
         self.win.set_resizable(False)  # sem isso a janela cresce com um texto longo e nunca volta a encolher
@@ -530,10 +532,15 @@ class VpnPanel(Gtk.Application):
 
     def on_page(self, *_):
         page = self.stack.get_visible_child_name()
-        # EXCLUSIVE só enquanto há campo para digitar: o foco chega sem precisar clicar
-        typing = page in ("off", "prompt")
-        LayerShell.set_keyboard_mode(
-            self.win, LayerShell.KeyboardMode.EXCLUSIVE if typing else LayerShell.KeyboardMode.ON_DEMAND)
+        # EXCLUSIVE só por um instante quando há campo para digitar: o foco chega sem precisar clicar.
+        # Volta logo para ON_DEMAND (o foco fica) porque com EXCLUSIVE o Hyprland bloqueia o clique no
+        # backdrop e o clique fora deixaria de fechar a gaveta.
+        if page in ("off", "prompt"):
+            LayerShell.set_keyboard_mode(self.win, LayerShell.KeyboardMode.EXCLUSIVE)
+            GLib.timeout_add(300, lambda: LayerShell.set_keyboard_mode(
+                self.win, LayerShell.KeyboardMode.ON_DEMAND) and False)
+        else:
+            LayerShell.set_keyboard_mode(self.win, LayerShell.KeyboardMode.ON_DEMAND)
         self.hint.set_text({"off": "ENTER conectar · ESC fechar", "prompt": "ENTER enviar · ESC cancelar",
                             "busy": "ESC cancelar", "on": "ESC fechar"}.get(page, ""))
         if page == "off":
@@ -745,6 +752,13 @@ class VpnPanel(Gtk.Application):
         self.refresh()
 
     # ---------------------------------------------------------- teclado / saída
+    def dismiss(self):
+        """Clique fora do painel: no meio de conectar/desconectar fica aberto (fechar mataria a operação)."""
+        if self.busy():
+            return
+        ares_sfx.play("close")
+        self.quit()
+
     def on_key(self, _ctrl, keyval, _code, _state):
         if keyval == Gdk.KEY_Escape:
             if self.connector.active:
