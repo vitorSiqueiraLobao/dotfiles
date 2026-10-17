@@ -7,7 +7,8 @@
 
 pgrep -x hyprlock >/dev/null && exit 0
 
-"$HOME/.config/hypr/scripts/ares_sfx.py" lock
+# ARES_SILENT=1: bloqueio automático (hypridle), sem som
+[[ -z $ARES_SILENT ]] && "$HOME/.config/hypr/scripts/ares_sfx.py" lock
 
 "$HOME/.config/hypr/scripts/breach_success.py" --wait &
 anim=$!
