@@ -22,6 +22,7 @@ gi.require_version("Gdk", "4.0")
 gi.require_version("Gtk4LayerShell", "1.0")
 from gi.repository import Gdk, GLib, Gtk  # noqa: E402
 from gi.repository import Gtk4LayerShell as LayerShell  # noqa: E402
+import ares_backdrop  # noqa: E402
 
 LOCK = os.path.expanduser("~/.config/hypr/scripts/lock.sh")
 
@@ -103,6 +104,7 @@ class PowerMenu(Gtk.Application):
             Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
         )
 
+        ares_backdrop.attach(self, self.dismiss)  # antes do painel, para ficar por baixo
         self.win = Gtk.ApplicationWindow(application=self)
         self.win.add_css_class("power")
         LayerShell.init_for_window(self.win)
@@ -176,6 +178,11 @@ class PowerMenu(Gtk.Application):
         ares_sfx.play("select")
         self.win.set_visible(False)
         subprocess.Popen(cmd, start_new_session=True)
+        self.quit()
+
+    def dismiss(self):
+        """Clique fora do painel."""
+        ares_sfx.play("close")
         self.quit()
 
     def on_key(self, _ctrl, keyval, _code, _state):

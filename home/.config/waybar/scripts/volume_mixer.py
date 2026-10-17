@@ -23,6 +23,7 @@ gi.require_version("Gdk", "4.0")
 gi.require_version("Gtk4LayerShell", "1.0")
 from gi.repository import Gdk, GLib, Gtk  # noqa: E402
 from gi.repository import Gtk4LayerShell as LayerShell  # noqa: E402
+import ares_backdrop  # noqa: E402
 
 APP_ID = "ares.volume.mixer"
 MAX_VOLUME = 150
@@ -291,6 +292,7 @@ class Mixer(Gtk.Application):
             Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
         )
 
+        ares_backdrop.attach(self, self.dismiss)  # antes do painel, para ficar por baixo
         self.win = Gtk.ApplicationWindow(application=self)
         self.win.add_css_class("mixer")
         self.win.set_default_size(380, -1)
@@ -340,6 +342,11 @@ class Mixer(Gtk.Application):
         if self.sub is not None:
             self.sub.terminate()
         Gtk.Application.do_shutdown(self)
+
+    def dismiss(self):
+        """Clique fora do painel."""
+        ares_sfx.play("close")
+        self.quit()
 
     def on_key(self, _ctrl, keyval, _code, _state):
         if keyval == Gdk.KEY_Escape:
