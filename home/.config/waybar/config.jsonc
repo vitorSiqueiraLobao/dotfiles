@@ -24,6 +24,7 @@
         "disk",
         "network",
         "custom/claude",
+        "custom/vpn",
         "custom/mixer",
         "custom/theme",
         "tray"
@@ -116,6 +117,14 @@
         "return-type": "json",
         "interval": 30,
         "on-click": "$HOME/.config/waybar/scripts/claude_limits.py"
+    },
+
+    // VPN do FortiClient (gaveta com senha + FortiToken; a GUI oficial do Linux não mostra o campo do token)
+    "custom/vpn": {
+        "exec": "$HOME/.config/waybar/scripts/ares_vpn.py --waybar",
+        "return-type": "json",
+        "interval": 5,
+        "on-click": "$HOME/.config/waybar/scripts/ares_vpn.py"
     },
 
     "custom/mixer": {

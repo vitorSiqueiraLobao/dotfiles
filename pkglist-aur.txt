@@ -1,6 +1,7 @@
 antigravity
 claude-code
 claude-desktop
+forticlient-vpn
 hunspell-pt-br
 mpvpaper
 papirus-folders
