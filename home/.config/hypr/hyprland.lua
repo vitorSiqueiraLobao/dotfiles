@@ -282,6 +282,7 @@ local screenshot = "$HOME/.config/hypr/scripts/screenshot.sh"
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
 hl.bind(mainMod .. " + SHIFT + CTRL + S", hl.dsp.exec_cmd(screenshot .. " full"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("kitty --class ares-pkg -o background_opacity=0.88 -e $HOME/.config/hypr/scripts/ares_pkg.sh"))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Animação de desbloqueio (Breach Protocol): aparece instantânea, sem o fade das
@@ -303,7 +304,7 @@ hl.layer_rule({
 -- A transparência base vem do kitty.conf (background_opacity).
 hl.window_rule({
     name         = "kitty-holo",
-    match        = { class = "^(kitty|ares-files)$" },
+    match        = { class = "^(kitty|ares-files|ares-pkg)$" },
     border_size  = 1,
     border_color = "rgba(00f0ffff) rgba(00f0ff4d)",
     opacity      = "1.0 0.75",
@@ -311,13 +312,13 @@ hl.window_rule({
 
 hl.window_rule({
     name      = "no-glow-others",
-    match     = { class = "negative:^(kitty|ares-files)$" },
+    match     = { class = "negative:^(kitty|ares-files|ares-pkg)$" },
     no_shadow = true,
 })
 
 hl.window_rule({
     name   = "ares-files-float",
-    match  = { class = "ares-files" },
+    match  = { class = "^(ares-files|ares-pkg)$" },
     float  = true,
     size   = { 1800, 1000 },
     center = true,
