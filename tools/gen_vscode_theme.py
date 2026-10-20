@@ -26,22 +26,22 @@ MODULE = "#120a0e"    # só hover/realce sutil (o resto fica preto)
 LINE = "#3a1018"      # linhas e bordas
 LINE2 = "#241016"     # borda mais discreta
 RED = "#ff1f3d"
-RED2 = "#ff5a6e"
+RED2 = "#d9606f"
 RED_DIM = "#8f1426"
-TEXT = "#e8e2e4"
-MUTED = "#7a6f73"
+TEXT = "#bdb5b9"
+MUTED = "#82777c"
 DIM = "#4a3a40"
-CYAN = "#00f0ff"
-CYAN2 = "#7af8ff"
+CYAN = "#9db8c4"
+CYAN2 = "#b9ccd4"
 MINT = "#2bd9a0"
-MINT2 = "#6ff2c4"
-AMBER = "#ffb000"
-AMBER2 = "#ffd166"
-BLUE = "#2a7fff"
-BLUE2 = "#6aa8ff"
+MINT2 = "#74c4a8"
+AMBER = "#d9a640"
+AMBER2 = "#d9bb7a"
+BLUE = "#7f93b8"
+BLUE2 = "#9aaccc"
 MAGENTA = "#ff2a8a"
-MAGENTA2 = "#ff70b3"
-WHITE = "#ffffff"
+MAGENTA2 = "#d97aa6"
+WHITE = "#d8d0d4"
 COLD = "#000000"      # painel inferior / terminal
 
 
@@ -222,7 +222,7 @@ colors = {
     # editor
     "editor.background": BG,
     "editor.foreground": TEXT,
-    "editorLineNumber.foreground": "#5a4a50",
+    "editorLineNumber.foreground": "#6a5d63",
     "editorLineNumber.activeForeground": CYAN,
     "editorLineNumber.dimmedForeground": LINE,
     "editorCursor.foreground": RED,
@@ -674,7 +674,7 @@ colors = {
 #         azul = módulos/primitivos · branco = variáveis · cinza quente = comentários
 tokens = [
     ("comment, punctuation.definition.comment", MUTED, "italic"),
-    ("comment.block.documentation, comment.block.javadoc, string.quoted.docstring", "#9a8c92", "italic"),
+    ("comment.block.documentation, comment.block.javadoc, string.quoted.docstring", "#948a8f", "italic"),
     ("comment keyword.codetag.notation, comment.line.todo", AMBER, "bold italic"),
 
     ("string, string.quoted, string.template, punctuation.definition.string", MINT2, None),
@@ -740,9 +740,10 @@ tokens = [
     ("markup.underline.link, string.other.link, markup.underline.link.image.markdown", CYAN, None),
     ("string.other.link.title.markdown, string.other.link.description.markdown, constant.other.reference.link.markdown", CYAN2, None),
     ("punctuation.definition.list.begin.markdown, markup.list.numbered.bullet, beginning.punctuation.definition.list.markdown", RED, None),
-    ("markup.quote, markup.quote punctuation.definition.quote.begin", "#b9a9af", "italic"),
+    ("markup.quote, markup.quote punctuation.definition.quote.begin", "#a89ea3", "italic"),
     ("meta.separator.markdown, punctuation.definition.thematic-break", LINE, None),
-    ("punctuation.definition.bold.markdown, punctuation.definition.italic.markdown, punctuation.definition.raw.markdown, punctuation.definition.markdown, punctuation.definition.string.begin.markdown, punctuation.definition.string.end.markdown, punctuation.definition.metadata.markdown", RED_DIM, None),
+    ("punctuation.definition.bold.markdown, punctuation.definition.italic.markdown, punctuation.definition.raw.markdown, punctuation.definition.markdown, punctuation.definition.string.begin.markdown, punctuation.definition.string.end.markdown, punctuation.definition.metadata.markdown", "#a82c40", None),
+    ("markup.underline.link.markdown, meta.link.inline.markdown markup.underline.link", "#7a929c", ""),
 
     # shell
     ("support.function.builtin.shell, support.function.builtin.bash, support.function.shell", CYAN, None),
@@ -783,7 +784,7 @@ semantic = {
     "variable": TEXT,
     "variable.readonly": AMBER2,
     "variable.defaultLibrary": BLUE2,
-    "parameter": "#ffb3bd",
+    "parameter": "#d9a0a8",
     "property": CYAN2,
     "enumMember": AMBER,
     "event": MAGENTA2,
