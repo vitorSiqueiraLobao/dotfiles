@@ -88,6 +88,28 @@ window.mixer {
 .muted .mute {
     color: #ff1f3d;
 }
+.outbtn {
+    background: none;
+    background-color: #160d12;
+    border: 1px solid #3a1018;
+    border-radius: 0;
+    box-shadow: none;
+    color: #7a6f73;
+    padding: 2px 8px;
+    margin-top: 4px;
+    min-height: 0;
+}
+.outbtn label {
+    font-size: 13px;
+}
+.outbtn:hover {
+    border-color: #8f1426;
+    color: #e8e2e4;
+}
+.outbtn.active {
+    border-color: #00f0ff;
+    color: #00f0ff;
+}
 .empty {
     color: #7a6f73;
     margin-top: 6px;
@@ -173,6 +195,23 @@ def label_apps(apps):
         else:
             for n, a in enumerate(streams, 1):
                 a["name"] += f" #{n}"
+
+
+def list_sinks():
+    """Todas as saídas (headset, monitor...) e qual é a padrão."""
+    default = pactl("get-default-sink").strip()
+    return [
+        {"name": s["name"], "label": s.get("description", s["name"]), "active": s["name"] == default}
+        for s in pactl_json("list", "sinks")
+    ]
+
+
+def set_output(name):
+    """Define a saída padrão e move os apps que já estão tocando."""
+    pactl("set-default-sink", name)
+    for s in pactl_json("list", "sink-inputs"):
+        if not s.get("properties", {}).get("ares.sfx"):
+            pactl("move-sink-input", str(s["index"]), name)
 
 
 def read_state():
@@ -319,6 +358,8 @@ class Mixer(Gtk.Application):
         out_label = Gtk.Label(label="╔═[ SAÍDA ]", xalign=0)
         out_label.add_css_class("section")
         panel.append(out_label)
+        self.out_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        panel.append(self.out_box)
         self.sink_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         panel.append(self.sink_box)
 
@@ -368,9 +409,32 @@ class Mixer(Gtk.Application):
             GLib.timeout_add(80, self.refresh)
         return False
 
+    def refresh_outputs(self):
+        sinks = list_sinks()
+        sig = [(o["name"], o["active"]) for o in sinks]
+        if sig == getattr(self, "_out_sig", None):
+            return
+        self._out_sig = sig
+        while (child := self.out_box.get_first_child()) is not None:
+            self.out_box.remove(child)
+        for o in sinks:
+            btn = Gtk.Button(label=("● " if o["active"] else "○ ") + o["label"])
+            btn.add_css_class("outbtn")
+            if o["active"]:
+                btn.add_css_class("active")
+            btn.get_child().set_xalign(0)
+            btn.get_child().set_ellipsize(3)
+            btn.connect("clicked", self.on_output, o["name"])
+            self.out_box.append(btn)
+
+    def on_output(self, _btn, name):
+        ares_sfx.play("nav")
+        threading.Thread(target=set_output, args=(name,), daemon=True).start()
+
     def refresh(self):
         self._refresh_pending = False
         sink, apps = read_state()
+        self.refresh_outputs()
 
         wanted = {}
         if sink:
