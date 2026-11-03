@@ -41,6 +41,7 @@ nano
 network-manager-applet
 networkmanager
 nodejs
+noto-fonts-emoji
 npm
 papirus-icon-theme
 pavucontrol
