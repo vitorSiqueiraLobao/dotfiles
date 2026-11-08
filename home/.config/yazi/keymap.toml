@@ -1,0 +1,13 @@
+# ARES // yazi: atalhos no estilo de gerenciador gráfico (além dos padrões vim)
+[mgr]
+prepend_keymap = [
+	{ on = "<C-c>",    run = "yank",                  desc = "Copiar" },
+	{ on = "<C-x>",    run = "yank --cut",            desc = "Recortar" },
+	{ on = "<C-v>",    run = "paste",                 desc = "Colar" },
+	{ on = "<C-a>",    run = "toggle_all --state=on", desc = "Selecionar tudo" },
+	{ on = "<Delete>", run = "remove",                desc = "Mover para a lixeira" },
+	{ on = "<S-Delete>", run = "remove --permanently", desc = "Apagar de vez" },
+	{ on = "<F2>",     run = "rename --cursor=before_ext", desc = "Renomear" },
+	{ on = "<C-n>",    run = "create",                desc = "Novo arquivo (termine com / para pasta)" },
+	{ on = "<Space>",  run = [ "toggle", "arrow 1" ], desc = "Marcar e descer" },
+]
