@@ -66,6 +66,29 @@ tooltip {
     background-color: @cyan;
 }
 
+#custom-ws1, #custom-ws2, #custom-ws3, #custom-ws4, #custom-ws5,
+#custom-ws6, #custom-ws7, #custom-ws8, #custom-ws9 {
+    padding: 0 4px;
+    margin: 3px 1px;
+    color: @muted;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+#custom-ws1:hover, #custom-ws2:hover, #custom-ws3:hover, #custom-ws4:hover, #custom-ws5:hover,
+#custom-ws6:hover, #custom-ws7:hover, #custom-ws8:hover, #custom-ws9:hover {
+    color: @cyan;
+    background-color: @module;
+    border: 1px solid @line;
+}
+
+#custom-ws1.active, #custom-ws2.active, #custom-ws3.active, #custom-ws4.active, #custom-ws5.active,
+#custom-ws6.active, #custom-ws7.active, #custom-ws8.active, #custom-ws9.active {
+    background-color: @red;
+    color: @bg;
+    border: 1px solid @red;
+}
+
 #workspaces {
     background-color: transparent;
     padding: 0 2px;
