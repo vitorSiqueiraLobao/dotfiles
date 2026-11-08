@@ -1,0 +1,39 @@
+# ARES // zathura (mesmas cores do kitty)
+set font "3270 Nerd Font 12"
+set recolor true
+set recolor-keephue false
+set recolor-darkcolor "#e8e2e4"
+set recolor-lightcolor "#08060a"
+set default-bg "#08060a"
+set default-fg "#e8e2e4"
+
+set statusbar-bg "#08060a"
+set statusbar-fg "#c9c0c4"
+set inputbar-bg "#08060a"
+set inputbar-fg "#ff1f3d"
+set notification-bg "#08060a"
+set notification-fg "#e8e2e4"
+set notification-error-bg "#08060a"
+set notification-error-fg "#ff1f3d"
+set notification-warning-bg "#08060a"
+set notification-warning-fg "#ffb000"
+set completion-bg "#08060a"
+set completion-fg "#c9c0c4"
+set completion-highlight-bg "#8f1426"
+set completion-highlight-fg "#ffffff"
+set completion-group-bg "#08060a"
+set completion-group-fg "#7a6f73"
+set highlight-color "#ffb000"
+set highlight-active-color "#ff1f3d"
+set index-bg "#08060a"
+set index-fg "#c9c0c4"
+set index-active-bg "#8f1426"
+set index-active-fg "#ffffff"
+
+set selection-clipboard clipboard
+set scroll-page-aware true
+set smooth-scroll true
+set adjust-open best-fit
+set guioptions sv
+
+map <C-r> recolor
