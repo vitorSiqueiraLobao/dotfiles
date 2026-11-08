@@ -10,7 +10,15 @@
 
     "modules-left": [
         "custom/ares-badge",
-        "hyprland/workspaces",
+        "custom/ws1",
+        "custom/ws2",
+        "custom/ws3",
+        "custom/ws4",
+        "custom/ws5",
+        "custom/ws6",
+        "custom/ws7",
+        "custom/ws8",
+        "custom/ws9",
         "hyprland/window"
     ],
     "modules-center": [
@@ -36,13 +44,58 @@
         "on-click": "$HOME/.config/waybar/scripts/power_menu.py"
     },
 
-    "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "[{name}]",
-        "format-icons": {
-            "default": ""
-        }
+    "custom/ws1": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 1",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 1 focus"
+    },
+
+    "custom/ws2": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 2",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 2 focus"
+    },
+
+    "custom/ws3": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 3",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 3 focus"
+    },
+
+    "custom/ws4": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 4",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 4 focus"
+    },
+
+    "custom/ws5": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 5",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 5 focus"
+    },
+
+    "custom/ws6": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 6",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 6 focus"
+    },
+
+    "custom/ws7": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 7",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 7 focus"
+    },
+
+    "custom/ws8": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 8",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 8 focus"
+    },
+
+    "custom/ws9": {
+        "exec": "$HOME/.config/waybar/scripts/workspace.sh 9",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/workspace.sh 9 focus"
     },
 
     "hyprland/window": {
