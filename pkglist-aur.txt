@@ -1,8 +1,12 @@
 antigravity
 claude-code
 claude-desktop
+codex-desktop-git
 forticlient-vpn
 hunspell-pt-br
 mpvpaper
 papirus-folders
+postman-bin
+spotify
+visual-studio-code-bin
 yay
