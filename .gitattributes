@@ -1,0 +1,2 @@
+# Endereços dos servidores IRIS ficam só no arquivo local (ver tools/redact_vscode_settings.py)
+home/.config/Code/User/settings.json filter=redact-vscode
