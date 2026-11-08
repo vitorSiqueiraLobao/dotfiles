@@ -15,8 +15,12 @@
     "editor.guides.bracketPairs": "active",
     "terminal.integrated.cursorStyle": "block",
     "terminal.integrated.cursorBlinking": true,
-    "workbench.iconTheme": "helium-icon-theme",
+    "workbench.iconTheme": "vscode-modern-icons",
     "security.promptForLocalFileProtocolHandling": false,
     "intersystems.language-server.suggestTheme": false,
-    "objectscript.showProposedApiPrompt": false
+    "objectscript.showProposedApiPrompt": false,
+    "window.confirmSaveUntitledWorkspace": false,
+    "editor.unicodeHighlight.includeStrings": false,
+    "editor.unicodeHighlight.includeComments": false,
+    "terminal.integrated.fontSize": 20
 }
