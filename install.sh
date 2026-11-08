@@ -54,9 +54,18 @@ link_firefox() {
     echo "  link:   firefox/$profile/user.js"
 }
 
+# ---------------------------------------------------------------------------
+# Git: filtro que tira os servidores IRIS do settings.json do VS Code no commit
+# ---------------------------------------------------------------------------
+setup_git_filters() {
+    git -C "$DOTFILES" config filter.redact-vscode.clean 'python3 tools/redact_vscode_settings.py'
+    git -C "$DOTFILES" config filter.redact-vscode.smudge cat
+}
+
 if [ "${1:-}" = "--links" ]; then
     link_home
     link_firefox
+    setup_git_filters
     exit 0
 fi
 
@@ -82,6 +91,7 @@ yay -S --needed - < "$DOTFILES/pkglist-aur.txt"
 # ---------------------------------------------------------------------------
 link_home
 link_firefox
+setup_git_filters
 
 info "VS Code: tema ARES Cyber-Red"
 if command -v code >/dev/null; then
