@@ -45,6 +45,7 @@ libvncserver
 limine
 linux
 linux-firmware
+lib32-vulkan-radeon
 mkinitcpio
 mpv
 nano
