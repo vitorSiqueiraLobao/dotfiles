@@ -203,7 +203,7 @@ tooltip {
     border-color: #ffb000;
 }
 
-#custom-mixer, #custom-theme {
+#custom-mixer, #custom-theme, #custom-bluetooth {
     background-color: @module;
     color: @cyan;
     border: 1px solid @line;
@@ -212,9 +212,17 @@ tooltip {
     font-size: 17px;
 }
 
-#custom-mixer:hover, #custom-theme:hover {
+#custom-mixer:hover, #custom-theme:hover, #custom-bluetooth:hover {
     color: @bg;
     background-color: @cyan;
+    border-color: @cyan;
+}
+
+#custom-bluetooth.off {
+    color: #4a3a40;
+}
+
+#custom-bluetooth.connected {
     border-color: @cyan;
 }
 
