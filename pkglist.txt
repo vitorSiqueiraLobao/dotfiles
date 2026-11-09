@@ -17,6 +17,7 @@ fd
 ffmpegthumbnailer
 firefox
 fzf
+gamescope
 git
 github-cli
 gnome-keyring
