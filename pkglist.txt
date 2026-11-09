@@ -2,6 +2,8 @@
 amd-ucode
 base
 base-devel
+bluez
+bluez-utils
 btop
 cmatrix
 cosmic-greeter
