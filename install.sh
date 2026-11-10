@@ -117,6 +117,9 @@ info "Login: greetd (autologin + hyprlock Breach Protocol)"
 sudo systemctl disable cosmic-greeter.service 2>/dev/null || true
 sudo systemctl enable greetd.service
 
+info "GPU: daemon do LACT (overclock/undervolt/ventoinha da RX 9070 XT)"
+sudo systemctl enable lactd.service
+
 # ---------------------------------------------------------------------------
 # Preferências (dconf): modo escuro
 # ---------------------------------------------------------------------------

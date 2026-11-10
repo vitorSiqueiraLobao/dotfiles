@@ -22,6 +22,7 @@ git
 github-cli
 gnome-keyring
 gnome-text-editor
+goverlay
 greetd
 greetd-tuigreet
 grim
@@ -38,6 +39,8 @@ inetutils
 intel-media-driver
 jq
 kitty
+lact
+lib32-mangohud
 libnotify
 libpulse
 libva-intel-driver
@@ -46,6 +49,7 @@ limine
 linux
 linux-firmware
 lib32-vulkan-radeon
+mangohud
 mkinitcpio
 mpv
 nano
