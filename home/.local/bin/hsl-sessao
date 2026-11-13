@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+"""Propaga HSL_USER e HSL_PASSWORD (rede/AD do HSL) para a sessão gráfica.
+
+A senha mora no gnome-keyring (service=hsl-ad, account=<usuário>) e o usuário em
+~/.config/hsl/hsl.conf. Este script os entrega a:
+  - Hyprland (hl.env via socket): apps abertos depois pelo Hyprland herdam as variáveis;
+  - systemd --user e D-Bus activation: apps iniciados por serviço ou por ativação D-Bus.
+Shells recebem as variáveis pelo ~/.config/hsl/env.sh (carregado no ~/.bashrc).
+
+Nunca imprime nem passa os valores por argumento de linha de comando.
+
+  hsl-sessao            espera o keyring destravar (até 10 min) e propaga
+  hsl-sessao --agora    não espera; falha se o keyring estiver travado
+  hsl-sessao --limpar   remove as variáveis da sessão
+"""
+import os
+import socket
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+CONF = Path.home() / ".config/hsl/hsl.conf"
+NOMES = ("HSL_USER", "HSL_PASSWORD")
+
+
+def usuario():
+    if not CONF.exists():
+        sys.exit(f"hsl-sessao: {CONF} não existe; rode hsl-senha")
+    for linha in CONF.read_text().splitlines():
+        if linha.strip().startswith("HSL_USER="):
+            return linha.split("=", 1)[1].strip().strip("\"'")
+    sys.exit(f"hsl-sessao: HSL_USER não definido em {CONF}")
+
+
+def keyring_destravado():
+    r = subprocess.run(["busctl", "--user", "get-property", "org.freedesktop.secrets",
+                        "/org/freedesktop/secrets/aliases/default", "org.freedesktop.Secret.Collection", "Locked"],
+                       capture_output=True, text=True)
+    return r.returncode == 0 and r.stdout.strip() == "b false"
+
+
+def senha(conta, esperar):
+    limite = time.time() + (600 if esperar else 0)
+    while not keyring_destravado():
+        if time.time() >= limite:
+            sys.exit("hsl-sessao: keyring travado; destrave-o e rode hsl-sessao de novo")
+        time.sleep(5)
+    r = subprocess.run(["secret-tool", "lookup", "service", "hsl-ad", "account", conta],
+                       capture_output=True, text=True, timeout=10)
+    if r.returncode != 0 or not r.stdout:
+        sys.exit(f"hsl-sessao: senha de {conta} não encontrada no keyring; rode hsl-senha")
+    return r.stdout
+
+
+def lua_str(valor):
+    """String longa do Lua ([==[...]==]) com nível que não colide com o conteúdo."""
+    n = 0
+    while f"]{'=' * n}]" in valor:
+        n += 1
+    return f"[{'=' * n}[{valor}]{'=' * n}]"
+
+
+def hyprland(valores):
+    assinatura = os.environ.get("HYPRLAND_INSTANCE_SIGNATURE")
+    if not assinatura:
+        return "fora do Hyprland"
+    caminho = Path(os.environ.get("XDG_RUNTIME_DIR", f"/run/user/{os.getuid()}")) / "hypr" / assinatura / ".socket.sock"
+    for nome, valor in valores.items():
+        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
+            s.connect(str(caminho))
+            s.sendall(f"eval hl.env({lua_str(nome)}, {lua_str(valor)})".encode())
+            resposta = s.recv(4096).decode(errors="replace").strip()
+        if resposta != "ok":
+            return f"Hyprland respondeu '{resposta[:80]}' para {nome}"
+    return "ok"
+
+
+def systemd_dbus(valores, limpar):
+    if limpar:
+        subprocess.run(["systemctl", "--user", "unset-environment", *NOMES], check=False)
+        return "ok"
+    env = dict(os.environ, **valores)
+    r = subprocess.run(["dbus-update-activation-environment", "--systemd", *NOMES], env=env, capture_output=True, text=True)
+    return "ok" if r.returncode == 0 else r.stderr.strip()[:120]
+
+
+def main():
+    args = set(sys.argv[1:])
+    limpar = "--limpar" in args
+    if limpar:
+        valores = {n: "" for n in NOMES}
+    else:
+        conta = usuario()
+        valores = {"HSL_USER": conta, "HSL_PASSWORD": senha(conta, "--agora" not in args)}
+    print(f"hsl-sessao: Hyprland {hyprland(valores)}; systemd/D-Bus {systemd_dbus(valores, limpar)}")
+
+
+if __name__ == "__main__":
+    main()
