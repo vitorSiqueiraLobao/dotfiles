@@ -5,6 +5,9 @@
 # Added by Antigravity CLI installer
 export PATH="/home/w0lf/.local/bin:$PATH"
 
+# Credenciais de rede do HSL (HSL_USER/HSL_PASSWORD), também para shells não interativos
+[[ -f ~/.config/hsl/env.sh ]] && source ~/.config/hsl/env.sh
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 

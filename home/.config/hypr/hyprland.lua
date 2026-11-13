@@ -54,6 +54,7 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("hypridle")   -- trava / apaga a tela / suspende quando parado (hypridle.conf)
     hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")   -- agente polkit: o FortiClient VPN precisa dele pra pedir senha de admin
     hl.exec_cmd("$HOME/.config/hypr/scripts/wallpaper.sh")   -- capacete de Ares em ASCII 3D (cai no hyprpaper se faltar o mpvpaper)
+    hl.exec_cmd("$HOME/.local/bin/hsl-sessao")   -- HSL_USER/HSL_PASSWORD do gnome-keyring para os apps da sessão
 end)
 
 

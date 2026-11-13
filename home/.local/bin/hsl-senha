@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Grava ou troca a senha de rede do HSL (AD) no gnome-keyring e propaga para a sessão.
+#   hsl-senha              usa o usuário de ~/.config/hsl/hsl.conf (pergunta se não houver)
+#   hsl-senha novo.login   troca o usuário e grava a senha dele
+set -euo pipefail
+
+conf="$HOME/.config/hsl/hsl.conf"
+mkdir -p "$(dirname "$conf")"
+
+usuario="${1:-}"
+if [[ -z $usuario && -r $conf ]]; then
+    usuario=$(sed -n 's/^HSL_USER=//p' "$conf" | tr -d "\"'")
+fi
+if [[ -z $usuario ]]; then
+    read -rp "Usuário de rede do HSL (login do AD): " usuario
+fi
+[[ -n $usuario ]] || { echo "usuário vazio" >&2; exit 1; }
+
+umask 077
+printf 'HSL_USER=%s\n' "$usuario" > "$conf"
+
+echo "Usuário: $usuario"
+echo "Digite a senha de rede (não aparece na tela):"
+secret-tool store --label="HSL - rede (AD) - $usuario" service hsl-ad account "$usuario"
+echo "Senha gravada no gnome-keyring."
+
+"$HOME/.local/bin/hsl-sessao" --agora || true
+echo "Terminais novos já recebem HSL_USER e HSL_PASSWORD. Neste terminal: source ~/.config/hsl/env.sh"
